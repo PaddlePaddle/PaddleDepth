@@ -10,6 +10,8 @@ PaddleDepth is a lightweight, easy-to-extend, easy-to-learn, high-performance, a
 on PaddlePaddle for depth information argumentation. It aims to create a industrial-level depth information enhancement solution to help developers using a lower cost to collect depth information.
 
 
+Currently, the proposed PaddleDepth repo contains four depth information argumentation methods, including **depth super resolution, depth completion, monocular depth estimation, and stereo depth estimation**. Below is the point cloud reconstruction result by depth completion, monocular depth estimation, and stereo depth estimation.
+
 https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-bd39-fdbb679eed58.mp4
 
 
