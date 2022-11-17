@@ -34,7 +34,7 @@ You can install the Paddle-DSR toolbox by following steps:
 -  install Paddle-DSR toolbox
 
 ```
-git clone https://github.com/kongdebug/Paddle-DSR-Lab.git
+git clone https://github.com/PaddlePaddle/PaddleDepth.git
 cd Depth_super_resolution
 pip install -r requirements.txt
 ```
