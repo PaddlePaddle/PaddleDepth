@@ -9,6 +9,11 @@
 PaddleDepth is a lightweight, easy-to-extend, easy-to-learn, high-performance, and for-fair-comparison toolkit based 
 on PaddlePaddle for depth information argumentation. It aims to create a industrial-level depth information enhancement solution to help developers using a lower cost to collect depth information.
 
+
+https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-bd39-fdbb679eed58.mp4
+
+
+
 ## 🌟 Features
 
 - **Rich model library**: Paddledepth provides over 10+ SOTA models including **depth super resolution, depth completion, monocular depth estimation, and stereo depth estimation**, in which 4+ models are **self-developed and first open sourced**.
