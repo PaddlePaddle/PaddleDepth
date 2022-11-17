@@ -1,0 +1,115 @@
+total_iters: 110000
+output_dir: output_dir
+# tensor range for function tensor2img
+min_max:
+  (0., 1.)
+
+model:
+  name: PMBAModel
+  generator:
+    name: PMBANet
+    num_channels: 1
+    base_filter: 64
+    feat: 256
+    scale_factor: 4
+  pixel_criterion:
+    name: L1Loss
+
+export_model:
+  - {name: 'generator', inputs_num: 1}
+
+dataset:
+  train:
+    name: SRDataset
+    gt_folder: data/PMBA/data_all_HR_x4_sub
+    lq_folder: data/PMBA/data_all_LR_x4_sub
+    num_workers: 4
+    batch_size: 32
+    scale: 4
+    preprocess:
+      - name: LoadImageFromFile
+        key: lq
+      - name: LoadImageFromFile
+        key: gt
+      - name: Transforms
+        input_keys: [lq, gt]
+        pipeline:
+          - name: SRPairedRandomCrop
+            gt_patch_size: 64
+            scale: 4
+            keys: [image, image]
+          - name: PairedRandomHorizontalFlip
+            keys: [image, image]
+          - name: PairedRandomVerticalFlip
+            keys: [image, image]
+          - name: PairedRandomTransposeHW
+            keys: [image, image]
+          - name: Transpose
+            keys: [image, image]
+          - name: Normalize
+            mean: [0., 0., 0.]
+            std: [255., 255., 255.]
+            keys: [image, image]
+  test:
+    name: SRDataset
+    gt_folder: data/PMBA/test_HR
+    lq_folder: data/PMBA/test_LR_x4
+    scale: 4
+    preprocess:
+      - name: LoadImageFromFile
+        key: lq
+      - name: LoadImageFromFile
+        key: gt
+      - name: Transforms
+        input_keys: [lq, gt]
+        pipeline:
+          - name: Transpose
+            keys: [image, image]
+          - name: Normalize
+            mean: [0., 0., 0.]
+            std: [255., 255., 255.]
+            keys: [image, image]
+
+lr_scheduler:
+  name: MultiStepDecay
+  learning_rate: 0.0004
+  milestones: [45000, 90000, 112500]
+  gamma: 0.1
+
+optimizer:
+  name: Adam
+  # add parameters of net_name to optim
+  # name should in self.nets
+  net_names:
+    - generator
+  beta1: 0.9
+  beta2: 0.99
+
+validate:
+  interval: 5000
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      name: PSNR
+      crop_border: 4
+      test_y_channel: False
+    ssim:
+      name: SSIM
+      crop_border: 4
+      test_y_channel: False
+    rmse:
+      name: RMSE
+      crop_border: 4
+    mad:
+      name: MAD
+      crop_border: 4
+    pe:
+      name: PE
+      crop_border: 4
+log_config:
+  interval: 100
+  visiual_interval: 500
+
+snapshot_config:
+  interval: 5000

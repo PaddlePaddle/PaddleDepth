@@ -1,0 +1,78 @@
+# epoch: 80 for total batch size=64
+total_iters: 960000
+output_dir: output_dir
+
+model:
+  name: WAFPModel
+  generator:
+    name: WAFPNet
+    num_residual_layer: 9
+    num_refine_layer: 9
+
+  mse_criterion:
+    name: MSELoss
+    reduction: sum
+  tv_criterion:
+    name: TVLoss
+
+dataset:
+  train:
+    name: HDF5Dataset
+    file_path: data/train_depth_x4_noise.h5
+    num_workers: 1
+    batch_size: 64
+  test:
+    name: MATDataset
+    file_path: data/test_data
+    num_workers: 1
+    batch_size: 1
+
+lr_scheduler:
+  name: MultiStepDecay
+  learning_rate: 0.1
+  milestones: [240000, 480000, 720000]
+  gamma: 0.1
+
+validate:
+  interval: 5000
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      name: PSNR
+      crop_border: 4
+      test_y_channel: True
+    ssim:
+      name: SSIM
+      crop_border: 4
+      test_y_channel: True
+    rmse:
+      name: RMSE
+      crop_border: 4
+    mad:
+      name: MAD
+      crop_border: 4
+    pe:
+      name: PE
+      crop_border: 4
+
+optimizer:
+  name: Momentum
+  # add parameters of net_name to optim
+  # name should in self.nets
+  net_names:
+    - generator
+  momentum: 0.9
+  weight_decay:
+    name: 'L2'
+    value: 0.0001
+  grad_clip:
+    name: 'ClipGradByGlobalNorm'
+    value: 0.4
+
+log_config:
+  interval: 200
+  visiual_interval: 5000
+
+snapshot_config:
+  interval: 10000
