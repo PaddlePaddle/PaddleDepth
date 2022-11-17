@@ -40,7 +40,7 @@ https://user-images.githubusercontent.com/57089550/202390935-d261437c-e5cc-4cb4-
 </div>
 ### 双目深度估计
 <div align="center">
-    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/monocular.gif" width = "400" />
+    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/.gif" width = "400" />
 </div>
 
 
