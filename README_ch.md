@@ -29,12 +29,19 @@ https://user-images.githubusercontent.com/57089550/202390935-d261437c-e5cc-4cb4-
 ## 👀 效果展示
 
 
-###深度补全
+### 深度补全
+<div align="center">
+    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/completion.gif" width = "400" />
+</div>
 
-
-###单目深度估计
-
-###双目深度估计
+### 单目深度估计
+<div align="center">
+    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/monocular.gif" width = "400" />
+</div>
+### 双目深度估计
+<div align="center">
+    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/monocular.gif" width = "400" />
+</div>
 
 
 ## 贡献
