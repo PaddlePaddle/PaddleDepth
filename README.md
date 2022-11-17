@@ -21,7 +21,7 @@ on PaddlePaddle for depth information argumentation. It aims to create a industr
 
 ## ⚡ Quick Experience
 > click the hyperlinks below to find the usage guidence for each task
-- [depth super resolution](./Depth_super_resolution/README_cn.md)
+- [depth super resolution](./Depth_super_resolution/README.md)
 - depth completion
 - monocular depth estimation
 - stereo depth estimation
