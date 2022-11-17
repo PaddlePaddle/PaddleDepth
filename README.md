@@ -23,9 +23,8 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 - **Fair comparison**: All the included algorithms are trained in the same environment and training strategy for fair comparison.
 
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/57089550/202442074-5c4a38a6-cefb-41de-8cec-55f442633c68.png" width = "600" />
+    <img src="https://user-images.githubusercontent.com/57089550/202442392-84e9ab8b-de9d-489d-b6a8-944661e30b01.png" width = "600" />
 </div>!
-
 
 ## ⚡ Quick Experience
 > click the hyperlinks below to find the usage guidence for each task
