@@ -32,8 +32,8 @@ Paddle-DSR 是一款基于 PaddlePaddle 的**深度图超分辨**开发套件，
 
 - Paddle-DSR-Lab安装，通过以下命令
 ```
-git clone https://github.com/kongdebug/Paddle-DSR-Lab.git
-cd Paddle-DSR-Lab
+git clone https://github.com/PaddlePaddle/PaddleDepth.git
+cd Depth_super_resolution
 pip install -r requirements.txt
 ```
 
