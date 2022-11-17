@@ -13,7 +13,7 @@ https://user-images.githubusercontent.com/57089550/202390935-d261437c-e5cc-4cb4-
 - **公平对比**: 基于飞桨框架，在相同的训练策略和环境下公平比较了深度信息增强领域里面SOTA(state-of-the-art)的算法
 
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/57089550/202390252-14904fb8-ed4c-4316-ac11-f442607944de.png" width = "800" />
+    <img src="https://user-images.githubusercontent.com/57089550/202390252-14904fb8-ed4c-4316-ac11-f442607944de.png" width = "600" />
 </div>
 
 ## ⚡ 快速开始
@@ -38,9 +38,10 @@ https://user-images.githubusercontent.com/57089550/202390935-d261437c-e5cc-4cb4-
 <div align="center">
     <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/monocular.gif" width = "400" />
 </div>
+
 ### 双目深度估计
 <div align="center">
-    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/.gif" width = "400" />
+    <img src="https://github.com/PaddlePaddle/PaddleDepth/blob/develop/docs/images/stereo.gif" width = "400" />
 </div>
 
 
