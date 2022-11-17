@@ -1,6 +1,12 @@
 
 # PaddleDepth: 飞桨深度信息增强开发套件
 
+<div align="center">
+
+[English](README.md)| [简体中文](README_ch.md)
+
+</div>
+
 PaddleDepth旨在打造一套产业级的深度信息增强方案，助力开发者更低成本的搜集深度信息，目前共包含深度图超分辨，深度图补全，单目深度估计及双目深度估计这四个子方向
 
 ## 🌟 特性
