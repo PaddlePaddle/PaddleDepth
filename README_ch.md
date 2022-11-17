@@ -3,13 +3,6 @@
 
 PaddleDepth旨在打造一套产业级的深度信息增强方案，助力开发者更低成本的搜集深度信息，目前共包含深度图超分辨，深度图补全，单目深度估计及双目深度估计这四个子方向
 
-
-
-https://user-images.githubusercontent.com/57089550/202400073-b45d95c4-0460-4c55-bcac-93c71613fb02.mp4
-
-
-<!-- [![Watch the video](https://img.youtube.com/vi/ag4vhntDm7k/maxresdefault.jpg)](https://youtu.be/T-D1KVIuvjA) -->
-
 ## 🌟 特性
 
 - **模型丰富**: 包含**深度图超分辨**、**深度补全**、**单目深度估计**、****双目深度估计****等10+前沿算法，及4+自研模型。
