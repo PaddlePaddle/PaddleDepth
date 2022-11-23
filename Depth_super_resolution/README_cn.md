@@ -1,4 +1,4 @@
-# Paddle-DSR：飞桨深度图超分辨开发套件
+# Paddle-DSR：飞桨深度图超分辨开发套件  
 </div>
 
 <div align="center">
@@ -71,10 +71,10 @@ python -u tools/main.py --config-file $file_path$ --evaluate-only --load $weight
 
 ## 定制化算法
 
-Paddle-DSR-Lab的文件结构如下所示
+Paddle-DSR工具箱的文件结构如下所示
 
 ```shell
-Paddle-DSR-Lab
+Depth_super_resolution
     │  README.md                # 英文说明文档
     │  README_cn.md             # 中文说明文档
     │  requirements.txt         # 安装依赖文件
