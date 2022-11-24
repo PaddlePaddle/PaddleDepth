@@ -21,10 +21,16 @@ A paddle implementation of the paper RCAN: Image Super-Resolution Using Very Dee
 
 ## 训练
 
+根据原论文，RCAN训练超分4倍的模型，需要超分2倍的权重作为预训练权重。执行以下命令，下载在`DIV2K`数据集上训练的超分2倍的预训练权重
+
+```shell
+wget https://paddlegan.bj.bcebos.com/models/RCAN_X2_DIV2K.pdparams
+```
+
 由于RCAN网络是为图像超分任务设计，保留网络的输入通道为3。执行以下命令，使用`PMBA`数据集训练RCAN
 
 ```shell
-python -u tools/main.py --config-file configs/rcan_dsr_x4.yaml
+python -u tools/main.py --config-file configs/rcan_dsr_x4.yaml --load ./RCAN_X2_DIV2K.pdparams
 ```
 
 ## 测试

@@ -75,7 +75,7 @@ python -u tools/main.py --config-file $file_path$ --evaluate-only --load $weight
 The file structure of Paddle-DSR is shown below:
 
 ```shell
-Paddle-DSR
+Depth_super_resolution
     │  README.md                
     │  README_cn.md             
     │  requirements.txt         

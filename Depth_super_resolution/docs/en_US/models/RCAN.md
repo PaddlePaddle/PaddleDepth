@@ -19,10 +19,16 @@ The same as [DRN Data prepare](docs/en_US/models/DRN.md).
 
 ## Training
 
+According to the paper, RCAN trains super-resolution 4x models that require super-resolution 2x weights as pre-training weights. Execute the following command to download the super-resolution 2x pre-training weights trained on the `DIV2K` dataset
+
+```shell
+wget https://paddlegan.bj.bcebos.com/models/RCAN_X2_DIV2K.pdparams
+```
+
 As the RCAN network is designed for the image super-segmentation task, the input channels to the network are reserved for 3. The following command is executed to train the RCAN using the `PMBA` dataset
 
 ```shell
-python -u tools/main.py --config-file configs/rcan_dsr_x4.yaml
+python -u tools/main.py --config-file configs/rcan_dsr_x4.yaml --load ./RCAN_X2_DIV2K.pdparams
 ```
 
 ## Evaluation
