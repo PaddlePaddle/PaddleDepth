@@ -13,11 +13,9 @@ PaddleMono是一款基于 PaddlePaddle 的单目深度估计工具箱，是 Padd
 
 作为初始版本，PaddldMono目前支持以下算法。
 
-[comment]: <> (- Monodepth2)
-
-[comment]: <> (- MLDA-Net)
-
-[comment]: <> (- Depth Hints &#40;以上两个模型训练时均可开启Depth Hints&#41;)
+- Monodepth2
+- MLDA-Net
+- Depth Hints (以上两个模型训练时均可开启Depth Hints)
 
 
 1. [Monodepth2 (ICCV2019)[1]](configs/monodepthv2/README.md)
@@ -31,8 +29,8 @@ PaddleMono是一款基于 PaddlePaddle 的单目深度估计工具箱，是 Padd
 你可以通过如下命令下载PaddleMono工具箱
 
 ```
-git clone https://github.com/PaddlePaddle/PaddleDepth.git
-cd Paddle-Mono
+git clone https://github.com/Zhao-Yian/Paddle-Mono.git
+cd code/Paddle-Mono
 pip install -r requirements.txt
 ```
 请在Python 3.9中使用PaddleMono.
@@ -57,18 +55,17 @@ pip install -r requirements.txt
 
 ## 结果
 
-我们在KITTI数据集上根据通用的Eigen划分方法评测了PaddleMono已经实现的算法。
+我们在KITTI2015上评测了PaddleMono已经实现的算法。
 
 注意我们并没有通过额外的技巧来优化Monodepth2模型的结果，因此你可以直接使用.sh的脚本文件来复现我们在表格中报告的精度。
 
-[comment]: <> (对于MLDA-Net，目前还没有完全对齐，表中给出torch权重转为paddle权重之后的测试精度。)
+对于MLDA-Net，目前还没有完全对齐，表中给出torch权重转为paddle权重之后的测试精度。
 
 ### KITTI
 
 |     Method        | abs_rel | sq_rel | rms | log_rms | a1  | a2  | a3 |
 |-------------|-------|-------|-------|-------|--------|--------|---------|
-| Monodepth2_640x192 | 0.109 | 0.880 | 4.903 | 0.200 | 0.868  | 0.955 | 0.979   |
-| Monodepth2_1024x320 | 0.104 | 0.798 | 4.619 | 0.192 | 0.879  | 0.958 | 0.980   |
+| Monodepth2_640x192 | 0.112 | 0.839 | 4.846 | 0.193 | 0.875  | 0.957 | 0.980   |
 | Depth Hints_640x192 | 0.110 | 0.818 | 4.728 | 0.189 | 0.881  | 0.959 | 0.981   |
 | Depth Hints_1024x320 | 0.109 | 0.794 | 4.474 | 0.185 | 0.887  | 0.963 | 0.982   |
 | MLDANet_640x192 | 0.108 | 0.829 | 4.678 | 0.184 | 0.885  | 0.962 | 0.983   |
