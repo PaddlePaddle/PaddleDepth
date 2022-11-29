@@ -24,9 +24,9 @@ run the script `./configs/monodepthv2/mdp.sh` to evaluate the model.
 
 ## Models
 
-[Pretraining Model]()
+[Pretraining Model](https://drive.google.com/file/d/14hUDOt4lt6glPdUAwgky523E1yZJ1Wvw/view?usp=sharing)
 
-the pretraining model will be open-sourced later 
+You can use this checkpoint to reproduce the result of Monodepth2_640x192.
 
 [comment]: <> (You can use this checkpoint to reproduce the result of Monodepth2_640x192.)
 
