@@ -10,9 +10,10 @@ Per-pixel ground-truth depth data is challenging to acquire at scale. To overcom
 ## Training
 **KITTI Datasets Pretraining**
 
-Run the script `./configs/monodepthv2/mdp.sh` to pre-train on KITTI datsets. Please update `--data_path` in the bash file as your training data path.
+Run the script `./configs/monodepthv2/mdp.sh` to pre-train on KITTI datsets. Please update `--data_path` in the bash file as your training data path and specify `weights_init` as the directory path of backbone weights, i.e., `/root/paddlejob/shenzhelun/PaddleMono-master/weights/backbone_weight/resnet18-pytorch`.
 
 **Finetuning**
+
 After training on 640x192 resolution, increase the resolution to 1024x320 for fine-tuning.
 Run the script `./configs/monodepthv2/mdp.sh` to jointly finetune the pre-train model on KITTI dataset. 
 Please update `--data_path` and `--load_weights_folder` as your training data path and pretrained weights folder.
@@ -24,11 +25,23 @@ run the script `./configs/monodepthv2/mdp.sh` to evaluate the model.
 ## Models
 
 [Pretraining Model](https://drive.google.com/file/d/14hUDOt4lt6glPdUAwgky523E1yZJ1Wvw/view?usp=sharing)
+
 You can use this checkpoint to reproduce the result of Monodepth2_640x192.
+
+[comment]: <> (You can use this checkpoint to reproduce the result of Monodepth2_640x192.)
+
+[Finetuning Model]()
+
+the finetuning model will be open-sourced later 
+
+[comment]: <> (You can use this checkpoint to reproduce the result of Monodepth2_1024x320.)
 
 [backbone weights](https://drive.google.com/file/d/1iVnt_6I0u2U4wo1ZeG1Iy2DvZ1Ltn-2l/view?usp=share_link)
 
-Please put pretraining model weights and backbone weights in the same directory (or different), and then specify `weights_init` as the directory path of backbone weights and specify `load_weights_folder` as the directory path of pretraining model weights when running the `evaluate_depth.py`.
+You can use this checkpoint to load the backbone weights of resnet18.
+
+Please put pretraining model weights and backbone weights in the same directory and specify `load_weights_folder` 
+as the directory path of pretraining model weights, i.e., `weights/weights_best_640x192/` when running the `mdp.sh`.
 
 ```text
 |-- weights/weights_best_640x192
@@ -38,6 +51,8 @@ Please put pretraining model weights and backbone weights in the same directory 
   |-- pose_encoder.pdparams
   |-- pose.pdparams
 ```
+
+If you want to put the backbone weights on the other directory, please further specify `weights_init` as the directory path of backbone weights, i.e., `/root/paddlejob/shenzhelun/PaddleMono-master/weights/backbone_weight/resnet18-pytorch`
 
 ## Citation
 If you find this code useful in your research, please cite:
