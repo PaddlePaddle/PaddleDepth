@@ -1,0 +1,62 @@
+type: MonoDepthv2
+use_gpu: true
+use_xpu: false
+log_frequency: 50
+visualdl_frequency: 2000
+save_frequency: 1
+freeze_bn: false
+
+data_path: /data2/zya/dataset/kitti
+log_dir: /data2/zya/output
+model_name: monodepthv2
+
+num_gpus: 1
+seed: 120
+split: eigen_zhou
+eval_split: eigen
+num_layers: 18
+dataset: kitti
+height: 192
+width: 640
+disparity_smoothness: 0.001
+scales: [0, 1, 2, 3]
+min_depth: 0.1
+max_depth: 100.0
+use_stereo: true
+frame_ids: [0, -1, 1]
+eval_mono: true
+eval_stereo: false
+
+batch_size: 12
+learning_rate: 0.0001
+start_epoch: 0
+num_epochs: 20
+scheduler_step_size: 15
+
+weights_init: weights/resnet18_pretrain
+pose_model_input: pairs
+pose_model_type: separate_resnet
+png: false
+
+num_workers: 4
+load_weights_folder: None
+models_to_load: ["encoder", "depth", "pose_encoder", "pose"]
+
+pred_depth_scale_factor: 1
+eval_out_dir: None
+
+use_depth_hints: false
+depth_hint_path: None
+
+v1_multiscale: false
+disable_automasking: false
+predictive_mask: false
+no_ssim: false
+no_eval: false
+avg_reprojection: false
+find_unused_parameters: false
+post_process: false
+save_pred_disps: false
+eval_eigen_to_benchmark: false
+disable_median_scaling: false
+
