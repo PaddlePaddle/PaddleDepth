@@ -27,7 +27,7 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 > 点击下述超链接查看各个细分深度信息增强算法的使用方法
 - [深度图超分辨](./Depth_super_resolution/README_cn.md)
 - 深度补全
-- 单目深度估计
+- [单目深度估计](./PaddleMono/README_cn.md)
 - 双目深度估计
 
 
