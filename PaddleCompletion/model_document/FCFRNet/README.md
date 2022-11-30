@@ -35,7 +35,7 @@ val: https://aistudio.baidu.com/aistudio/datasetdetail/176686
 
 Warning: These files are about to 50GB，please ensure you have enough  space to store.
 
-When you have unzip these zip file.You need to create a file.You need to run the following code in shell.
+When you have unzip these zip file.You need to create a file and run the following code in shell.
 
 ```bash
 mkdir data
@@ -73,7 +73,7 @@ The training code of FCFRNet will be open-sourced later.
 ## Evaluation
 
 **Important**:for evaluation , you need to download sparse to coarse depth val image  from [this website](https://aistudio.baidu.com/aistudio/datasetdetail/175535/0)
-and employ it as input of the proposed network. Sparse-to-Coarse is trained using STD. Besides you need to download weight from [this website](https://aistudio.baidu.com/aistudio/datasetdetail/176607)
+and employ it as input of the proposed network.
 
 [comment]: <> (We use the result of )
 
