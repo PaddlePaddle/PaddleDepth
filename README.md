@@ -31,7 +31,7 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 - [depth super resolution](./Depth_super_resolution/README.md)
 - [depth completion](./PaddleCompletion/README.md)
 - [monocular depth estimation](./PaddleMono/README.md)
-- stereo depth estimation
+- [stereo depth estimation](./Paddlestereo/README.md)
 
 
 <a name="效果展示"></a>
