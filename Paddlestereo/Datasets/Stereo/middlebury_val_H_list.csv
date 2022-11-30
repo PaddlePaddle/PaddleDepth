@@ -1,0 +1,16 @@
+left_img,right_img,gt_disp
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Australia/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Australia/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Bicycle2/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Bicycle2/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Classroom2E/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Classroom2E/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Crusade/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Crusade/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Djembe/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Djembe/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Hoops/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Hoops/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Newkuba/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Newkuba/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Staircase/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Staircase/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/AustraliaP/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/AustraliaP/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Classroom2/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Classroom2/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Computer/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Computer/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/CrusadeP/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/CrusadeP/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/DjembeL/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/DjembeL/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Livingroom/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Livingroom/im1.png,None
+/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Plants/im0.png,/home2/dataset/jack/Documents_home1/Database/MiddEval/MiddEval3/testH/Plants/im1.png,None
