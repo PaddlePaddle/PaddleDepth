@@ -1,0 +1,38 @@
+# Model
+model_name: fcfrnet
+layers: 34
+# Dataset
+dataset:
+    name: "KITTI"
+    data_folder: "./data/data_rgb"
+    input_mode: "rgbd"
+    jitter: 0.1
+    calib_path: "./data_loader/calib_cam_to_cam.txt"
+
+
+# Optimizer
+optimizer:
+    name: Adam
+    lr: 1e-5
+    weight_decay: 0.0
+
+
+# Training related
+epochs: 21
+start_epoch: 0
+resume: None
+train_mode: dense
+pretrained: None
+# Val mode
+val: select
+# Important setting####
+evaluate: bestmodel.pdparams
+# for test: evaluate: bestmodel.pdparams
+#######################
+rank_metric: rmse
+
+
+# Others
+wokers: 4
+batch_size: 1
+print-freq: 10
