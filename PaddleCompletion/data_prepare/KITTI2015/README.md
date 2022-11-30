@@ -25,7 +25,6 @@ For color images, KITTI Raw dataset is also needed, which is available at the [K
 Please follow the official instructions (cf., devkit/readme.txt in each dataset) for preparation.
 
 
-In FCFRNet project,we provide a second stage framework to do depth completion. Thus,you need do sparse to coarse  in a common network,and use it in this project. You can download  in [this]()
 
 You can download the dataset by running the following command in project root directory:
 
@@ -47,7 +46,6 @@ sh data_prepare/KITTI2015/rgb_val_downloader.sh
 │    │    └── intrinsics
 │    └── val_selection_cropped
 │        ├── groundtruth_depth
-|        |── data_depth_dense_new  #### Need to attention!
 │        ├── image
 │        ├── intrinsics
 │        └── velodyne_raw
