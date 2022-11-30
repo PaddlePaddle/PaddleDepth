@@ -28,7 +28,7 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 - [深度图超分辨](./Depth_super_resolution/README_cn.md)
 - [深度补全](./PaddleCompletion/README_zh-CN.md)
 - [单目深度估计](./PaddleMono/README_zh-CN.md)
-- 双目深度估计
+- 双目深度估计(./Paddlestereo/README_zh-CN.md)
 
 
 <a name="效果展示"></a>
