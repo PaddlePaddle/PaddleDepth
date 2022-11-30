@@ -27,9 +27,6 @@ In this framework, you need  download frist step( sparse to coarse) data in Aist
 
 ## Training
 The training code of FCFRNet will be open-sourced later.
-```bash
-python train.py -c ./model_document/FCFRNet/FCFRNet.yaml
-```
 
 ## Evaluation
 
