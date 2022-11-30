@@ -14,7 +14,7 @@ on PaddlePaddle for Stereo Matching. It is a part of the Paddledepth project.
 
 As initial version, we support the following algoirthms. We are working on more algorithms. Of course, you are welcome to add your algorithms here.
 
-1. [PWCNet (ECCV2022)[1]](model_document/PCWNet/README.md)
+1. [PCWNet (ECCV2022)[1]](model_document/PCWNet/README.md)
 2. [PSMNet (CVPR2018)[2]](model_document/PSMNet/README.md)
 
 Please click the hyperlink of each algorithm for more detailed explanation.
