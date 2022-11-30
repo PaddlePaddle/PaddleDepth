@@ -16,14 +16,56 @@ Depth completion aims to recover a dense depth map from a sparse depth map with 
 
 ## Dataset
 In this framework, you need  download frist step( sparse to coarse) data in Aistudio.You can download sparse to coarse depth image from the following link.Sparse to Coarse is trained using STD. 
-[train-001](https://aistudio.baidu.com/aistudio/datasetdetail/176620)
-[train-002](https://aistudio.baidu.com/aistudio/datasetdetail/176630)
-[train-003](https://aistudio.baidu.com/aistudio/datasetdetail/176641)
-[train-004](https://aistudio.baidu.com/aistudio/datasetdetail/176648)
-[train-005](https://aistudio.baidu.com/aistudio/datasetdetail/176663)
-[train-006](https://aistudio.baidu.com/aistudio/datasetdetail/176677)
-[train-007](https://aistudio.baidu.com/aistudio/datasetdetail/176682)
-[val](https://aistudio.baidu.com/aistudio/datasetdetail/176686)
+
+train-001: https://aistudio.baidu.com/aistudio/datasetdetail/176620
+
+train-002: https://aistudio.baidu.com/aistudio/datasetdetail/176630
+
+train-003: https://aistudio.baidu.com/aistudio/datasetdetail/176641
+
+train-004: https://aistudio.baidu.com/aistudio/datasetdetail/176648
+
+train-005: https://aistudio.baidu.com/aistudio/datasetdetail/176663
+
+train-006: https://aistudio.baidu.com/aistudio/datasetdetail/176677
+
+train-007: https://aistudio.baidu.com/aistudio/datasetdetail/176682
+
+val: https://aistudio.baidu.com/aistudio/datasetdetail/176686
+
+Warning: These files are about to 50GB，please ensure you have enough  space to store.
+
+When you have unzip these zip file.You need to create a file.You need to run the following code in shell.
+
+```bash
+mkdir data
+%cd data
+mkdir train
+mkdir val
+%cd ~
+```
+Please make sure you move `train-001` to `train-007` files to `train` folder ,and move `val` files to `val` folder
+
+```bash
+train-001《====》2011_09_26_drive_0059_sync
+train-002《====》2011_09_28_drive_0016_sync
+
+|---data
+|     |---train
+|     |       |----2011_09_28_drive_0016_sync
+|       .....
+|     |       |----2011_10_03_drive_0042_sync
+|     |---val
+|     |       |----val/2011_09_26_drive_0002_sync
+|       .....
+|     |---depth_selection
+|     |       |----test_depth_completion_anonymous
+|     |       |----test_depth_prediction_anonymous
+|     |       |----val_selection_cropped
+|     |---data_json
+```
+
+**Note**:Besides you need to know that the zip file only include dense depth input image.You need to download rgb and groundtruth image form [KITTI Raw Website](http://www.cvlibs.net/datasets/kitti/raw_data.php) and [KITTI official Website](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion).
 
 ## Training
 The training code of FCFRNet will be open-sourced later.
