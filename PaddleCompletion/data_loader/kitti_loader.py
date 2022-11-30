@@ -93,11 +93,11 @@ def train_transform(rgb, sparse, target, rgb_near, args):
         sparse = transform_geometric(sparse)
     target = transform_geometric(target)
     if rgb is not None:
-        brightness = np.random.uniform(max(0, 1 - args.jitter),
-                                       1 + args.jitter)
-        contrast = np.random.uniform(max(0, 1 - args.jitter), 1 + args.jitter)
-        saturation = np.random.uniform(max(0, 1 - args.jitter),
-                                       1 + args.jitter)
+        brightness = np.random.uniform(max(0, 1 - args.dataset['jitter']),
+                                       1 + args.dataset['jitter'])
+        contrast = np.random.uniform(max(0, 1 - args.dataset['jitter']), 1 + args.dataset['jitter'])
+        saturation = np.random.uniform(max(0, 1 - args.dataset['jitter']),
+                                       1 + args.dataset['jitter'])
         transform_rgb = Compose([
             ColorJitter(brightness, contrast, saturation, 0),
             transform_geometric
@@ -198,7 +198,7 @@ def get_paths_and_transform(split, args):
 
         def get_rgb_paths(p):
             ps = p.split('/')
-            pnew = '/'.join([args.data_folder] + ['kitti'] + ps[-6:-4] +
+            pnew = '/'.join([args.dataset['data_folder']] +  ps[-6:-4] +
                             ps[-2:-1] + ['data'] + ps[-1:])
             return pnew
     elif split == "val":
@@ -218,7 +218,7 @@ def get_paths_and_transform(split, args):
             def get_rgb_paths(p):
                 ps = p.split('/')
                 pnew = '/'.join(ps[:-7] +
-                                ['kitti'] + ps[-6:-4] + ps[-2:-1] + ['data'] + ps[-1:])
+                                ps[-6:-4] + ps[-2:-1] + ['data'] + ps[-1:])
                 return pnew
         elif args.val == "select":
             transform = no_transform
@@ -228,7 +228,7 @@ def get_paths_and_transform(split, args):
             
             # "depth_selection/val_selection_cropped/velodyne_raw/*.png")
             glob_gt = os.path.join(
-                args.data_folder,
+                args.dataset['data_folder'],
                 "depth_selection/val_selection_cropped/groundtruth_depth/*.png"
             )
 
