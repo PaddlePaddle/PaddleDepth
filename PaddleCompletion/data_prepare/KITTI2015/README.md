@@ -24,7 +24,7 @@ For color images, KITTI Raw dataset is also needed, which is available at the [K
 
 Please follow the official instructions (cf., devkit/readme.txt in each dataset) for preparation.
 
-
+If you want to run `FCFRNet`,you need to do extra data prepare.Please read [this](https://github.com/PaddlePaddle/PaddleDepth/blob/develop/PaddleCompletion/model_document/FCFRNet/README.md)
 
 You can download the dataset by running the following command in project root directory:
 
