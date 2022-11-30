@@ -12,7 +12,7 @@
 }
 ```
 
-##Dataset structure
+## Dataset structure
 
 - please place the dataset as described in the `Datasets/Stereo/scene_flow_training_list.csv` and `Datasets/Stereo/scene_flow_testing_list.csv` 
 - Optionally you can write your own csv file and place the dataset as you like. 
