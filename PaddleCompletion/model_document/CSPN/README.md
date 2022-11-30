@@ -1,8 +1,10 @@
 # CSPN(ECCV 2018)
+
 A paddle implementation of the paper CSPN: Depth Estimation via Affinity Learned with Convolutional Spatial Propagation Network 
 [\[CVPR 2018\]](https://openaccess.thecvf.com/content_ECCV_2018/html/Xinjing_Cheng_Depth_Estimation_via_ECCV_2018_paper.html)
 
 ## Abstract
+
 Depth estimation from a single image is a fundamental problem in computer vision. In this paper, we propose a simple yet effective convolutional spatial propagation network (CSPN) to learn the affinity matrix for depth prediction. Specifically, we adopt an efficient linear propagation model, where the propagation is performed with a manner of recurrent convolutional operation, and the affinity among neighboring pixels is learned through a deep convolutional neural network (CNN). We apply the designed CSPN to two depth estimation tasks given a single image: (1) To refine the depth output from state-of-the-art (SOTA) existing methods; and (2) to convert sparse depth samples to a dense depth map by embedding the depth samples within the propagation procedure. The second task is inspired by the availability of LIDARs that provides sparse but accurate depth measurements. We experimented the proposed CSPN over two popular benchmarks for depth estimation, ie NYU v2 and KITTI, where we show that our proposed approach improves in not only quality (e.g., 30% more reduction in depth error), but also speed (e.g., 2 to 5$ imes$ faster) than prior SOTA methods.
 
 ## Training
