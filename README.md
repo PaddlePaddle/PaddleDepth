@@ -29,7 +29,7 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 ## ⚡ Quick Experience
 > click the hyperlinks below to find the usage guidence for each task
 - [depth super resolution](./Depth_super_resolution/README.md)
-- depth completion
+- [depth completion](./PaddleCompletion/README.md)
 - [monocular depth estimation](./PaddleMono/README.md)
 - stereo depth estimation
 
