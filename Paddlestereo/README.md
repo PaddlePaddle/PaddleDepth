@@ -29,7 +29,8 @@ You can either git clone this whole repo by:
 ```
 git clone https://github.com/PaddlePaddle/PaddleDepth
 cd PaddleDepth/Paddlestereo
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate paddle_env
 ```
 
 ## Dataset
@@ -57,29 +58,31 @@ $ ./Scripts/start_test_kitti2012_stereo_net.sh
 The file structure of PaddleStereo is shown below:
 ```shell
 PaddleStereo
-    │ README.md 
-    │ requirements.txt
+    │- data_prepare
+    │- model_document
+    │- README.md 
+    │- environment.yml
     │- Datasets
     │- Example
     │- Scripts
-    │- Source
-    │  │- Algorithm
-    │  │- Core
-    │  │- FileHandler
-    │  │- ImgHandler
-    │  │- SysBasic
-    │  │- Template
-    │  │- Tools
-    │  └─ UserModelImplementation
-    │     │- Dataloaders
-    │     └─ Models
+    └─ Source
+       │- Algorithm
+       │- Core
+       │- FileHandler
+       │- ImgHandler
+       │- SysBasic
+       │- Template
+       │- Tools
+       └─ UserModelImplementation
+          │- Dataloaders
+          └─ Models
 ```
 
 It is easy to design your own method following the 3 steps:
 
 1. Check and write your own model's to `Models`
 2. Check and write your own dataloder's to `Dataloders`
-3. Write your own start file (.sh)
+3. Write your own start file (.sh) to `Scripts`
 
 ## Results
 

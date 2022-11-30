@@ -29,7 +29,8 @@ PaddleStereo 是一款基于 PaddlePaddle 的双目深度估计工具箱，是 P
 ```
 git clone https://github.com/PaddlePaddle/PaddleDepth
 cd PaddleDepth/Paddlestereo
-pip install -r requirements.txt
+conda env create -f environment.yml
+conda activate paddle_env
 ```
 
 ## 数据集准备
@@ -57,29 +58,31 @@ $ ./Scripts/start_test_kitti2012_stereo_net.sh
 PaddleStereo的整体代码结构如下:
 ```shell
 PaddleStereo
-    │ README.md 
-    │ requirements.txt
+    │- data_prepare
+    │- model_document
+    │- README.md 
+    │- environment.yml
     │- Datasets
     │- Example
     │- Scripts
-    │- Source
-    │  │- Algorithm
-    │  │- Core
-    │  │- FileHandler
-    │  │- ImgHandler
-    │  │- SysBasic
-    │  │- Template
-    │  │- Tools
-    │  └─ UserModelImplementation
-    │     │- Dataloaders
-    │     └─ Models
+    └─ Source
+       │- Algorithm
+       │- Core
+       │- FileHandler
+       │- ImgHandler
+       │- SysBasic
+       │- Template
+       │- Tools
+       └─ UserModelImplementation
+          │- Dataloaders
+          └─ Models
 ```
 
 你可以按照如下步骤开发自己的算法:
 
 1. 检查你的模型是否需要模型来进行训练，如果有把模型加入到 `model`中
 2. 检查你的模型是否需要新的dataloader，如果有把它们加到`Dataloders`中
-3. 加入你自己的启动文件（.sh）
+3. 添加你自己的启动文件（.sh）到`Scripts`中
 
 ## 结果
 
