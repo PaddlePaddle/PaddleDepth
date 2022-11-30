@@ -22,7 +22,7 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
         "unsupported mode: {}".format(mode)
     if mode == 'train':
         model.train()
-        lr = adjust_learning_rate(args.lr, optimize, epoch)
+        lr = adjust_learning_rate(args.optimizer['lr'], optimize, epoch)
     else:
         model.eval()
         lr = 0
@@ -56,7 +56,7 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
             # Loss 1: the direct depth supervision from ground truth label
             # mask=1 indicates that a pixel does not ground truth labels
             if 'sparse' in args.train_mode:
-                depth_loss = MaskedMSELoss(pred, batch_data['d'])
+                depth_loss = MaskedMSELoss()(pred, batch_data['d'])
                 # mask = (batch_data['d'] < 1e-3).float()
                 mask = paddle.to_tensor(batch_data['d'] < 1e-3, dtype="float32")
             elif 'dense' in args.train_mode:
@@ -67,7 +67,7 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
                 # elif i==1:
                 #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+2*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
                 # else:
-                depth_loss = MaskedMSELoss(pred, gt)  # +depth_criterion(global_features, res_gt)
+                depth_loss = MaskedMSELoss()(pred, gt)  # +depth_criterion(global_features, res_gt)
                 # depth_loss = depth_criterion(pred, gt)+0.1*depth_criterion(depth_pred, gt)+0.1*depth_criterion(lidar_pred, gt)+0.1*depth_criterion(global_features, res_gt)
                 # mask = (gt < 1e-3).float()
                 mask = paddle.to_tensor((gt < 1e-3), dtype="float32")
@@ -92,17 +92,23 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
 
                     # compute the corresponding intrinsic parameters
                     height_, width_ = pred_.size(2), pred_.size(3)
+                    if args.use_pose:
+                        # hard-coded KITTI camera intrinsics
+                        K = load_calib(args.dataset['calib_path'])
+                        fu, fv = float(K[0, 0]), float(K[1, 1])
+                        cu, cv = float(K[0, 2]), float(K[1, 2])
+                        kitti_intrinsics = Intrinsics(owidth, oheight, fu, fv, cu, cv)
                     intrinsics_ = kitti_intrinsics.scale(height_, width_)
 
                     # inverse warp from a nearby frame to the current frame
                     warped_ = homography_from(rgb_near_, pred_,
                                               batch_data['r_mat'],
                                               batch_data['t_vec'], intrinsics_)
-                    photometric_loss += PhotometricLoss(
+                    photometric_loss += PhotometricLoss()(
                         rgb_curr_, warped_, mask_) * (2 ** (scale - num_scales))
 
             # Loss 3: the depth smoothness loss
-            smooth_loss = SmoothnessLoss(pred) if args.w2 > 0 else 0
+            smooth_loss = SmoothnessLoss()(pred) if args.w2 > 0 else 0
 
             # backprop
             loss = depth_loss + args.w1 * photometric_loss + args.w2 * smooth_loss
@@ -191,7 +197,7 @@ def iterate_val(mode, args, loader, model, optimizer, logger, epoch):
             # Loss 1: the direct depth supervision from ground truth label
             # mask=1 indicates that a pixel does not ground truth labels
             if 'sparse' in args.train_mode:
-                depth_loss = MaskedMSELoss(pred, batch_data['d'])
+                depth_loss = MaskedMSELoss()(pred, batch_data['d'])
                 mask = (batch_data['d'] < 1e-3).float()
             elif 'dense' in args.train_mode:
                 # res_gt = gt-batch_data['d']
@@ -201,7 +207,7 @@ def iterate_val(mode, args, loader, model, optimizer, logger, epoch):
                 # elif i==1:
                 #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+2*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
                 # else:
-                depth_loss = MaskedMSELoss(pred, gt)  # +depth_criterion(global_features, res_gt)
+                depth_loss = MaskedMSELoss()(pred, gt)  # +depth_criterion(global_features, res_gt)
                 # depth_loss = depth_criterion(pred, gt)+0.1*depth_criterion(depth_pred, gt)+0.1*depth_criterion(lidar_pred, gt)+0.1*depth_criterion(global_features, res_gt)
                 mask = (gt < 1e-3).float()
 
@@ -238,11 +244,11 @@ def iterate_val(mode, args, loader, model, optimizer, logger, epoch):
                     warped_ = homography_from(rgb_near_, pred_,
                                               batch_data['r_mat'],
                                               batch_data['t_vec'], intrinsics_)
-                    photometric_loss += PhotometricLoss(
+                    photometric_loss += PhotometricLoss()(
                         rgb_curr_, warped_, mask_) * (2 ** (scale - num_scales))
 
             # Loss 3: the depth smoothness loss
-            smooth_loss = SmoothnessLoss(pred) if args.w2 > 0 else 0
+            smooth_loss = SmoothnessLoss()(pred) if args.w2 > 0 else 0
 
             # backprop
             loss = depth_loss + args.w1 * photometric_loss + args.w2 * smooth_loss
