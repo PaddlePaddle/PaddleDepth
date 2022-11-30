@@ -58,7 +58,7 @@
 
 [comment]: <> (```)
 
-##Dataset structure
+## Dataset structure
 
 - please place the dataset as described in the `Datasets/Stereo/kitti2012_training_list.csv` and `Datasets/Stereo/kitti2015_training_list.csv` 
 - Optionally you can write your own csv file and place the dataset as you like.
