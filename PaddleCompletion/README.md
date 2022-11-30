@@ -28,21 +28,26 @@ cd PaddleDepth/PaddleCompletion
 pip install -r requirements.txt
 ```
 
-## Dataset 
-see guidance in [dataset_prepare](data_prepare/data_prepare.md) for dataset preparation.
+This project is based on PaddlePaddle 2.3.2. Please use PaddleCompletion in python 3.9. 
+
+## Dataset
+
+See guidance in [dataset_prepare](data_prepare/data_prepare.md) for dataset preparation.
 
 ## Usage
 
 ### Training
 
-1. Modify the configuration file in the corresponding directories
-2. Run the `train.py` with specified config, for example, `python train.py --c config/CSPN.yaml`
+1. Modify the .yaml file in the `configs` directory.
+2. Run the `train.py` with specified config, eg: `python train.py --c config/CSPN.yaml`
+
+* We provide shell scripts to help you reproduce our experimental results: `bash scripts/train_cspn.sh`.
 
 ### Evaluation
 
-1. Modify the configuration file in the corresponding directories 
-2. Download the trained model and put it in the corresponding directory
-3. Run the `evaluate.py` with specified config, for example, `python evaluate.py --c config/CSPN.yaml`
+1. Modify the configuration file in the `configs` directory.
+2. Download the trained model and put it in the corresponding directory, eg: `weights/cspn/model_best.pdparams`.
+3. Run the `evaluate.py` with specified config, eg: `python evaluate.py --c config/CSPN.yaml`
 
 ## Customization
 
@@ -67,6 +72,7 @@ You can easily reproduce our results using provided shell scripts!
 
 
 ### NYU Depth V2
+
 | Data    | RMSE   | REL    | DELTA1.02 | DELTA1.05 | DELTA1.10 |
 |---------| ------ | ------ | --------- | --------- | --------- |
 | `CSPN`  | 0.1111 | 0.0151 | 0.8416    | 0.9386    | 0.9729    |
@@ -79,6 +85,7 @@ Feel free to submit issues or emails to ask questions or contribute your code.
 If you would like to implement new features, please submit a issue or emails to discuss with us first.
 
 ## Acknowledgement
+
 PaddleDepth is an open source project that is contributed by researchers and engineers 
 from various colleges and companies. 
 We appreciate all the contributors who implement their methods or add new features, 

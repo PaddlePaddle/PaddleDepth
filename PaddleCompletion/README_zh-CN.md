@@ -1,21 +1,20 @@
-# PaddleDepthCompletion: 一个关于深度信息补全的统一框架
-
+# PaddleCompletion: 一个关于深度信息补全的统一框架
 
 <div align="center">
 
 [English](README.md)| [简体中文](README_zh-CN.md)
 
 </div>
-PaddleCompletion 是一款基于 PaddlePaddle 的深度信息补全工具箱，是 PaddleDepth项目的成员之一。
-它具有可扩展性，容易上手的特点，此外它在相同的训练策略和环境下公平比较了深度信息补全领域里面SOTA(state-of-the-art)的算法
+PaddleCompletion 是一款基于 PaddlePaddle 的深度信息补全工具箱，是 PaddleDepth 项目的成员之一。
+它具有可扩展性，容易上手的特点，此外它在相同的训练策略和环境下公平比较了深度信息补全领域里面SOTA(state-of-the-art)的算法。
 
 ## 基准测试和模型库
 
 作为初始版本，PaddleCompletion目前支持以下算法。
 
 
-1. [CSPN (ECCV2018)[1]](model_document/CSPN/README.md)
-2. [FCFRNet (AAAI2021)[2]](model_document/CSPN/README.md)
+1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
+2. [FCFRNet (AAAI2021)](model_document/CSPN/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
@@ -29,16 +28,26 @@ cd PaddleDepth/PaddleCompletion
 pip install -r requirements.txt
 ```
 
+PaddleCompletion 基于 PaddlePaddle 2.3.2 版本开发，请使用 python 3.9 运行 PaddleCompletion 。
+
 ## 数据集准备
-你可以参照 [dataset_prepare](data_prepare/data_prepare.md) 来进行数据集的准备.
+
+你可以参照 [dataset_prepare](data_prepare/data_prepare.md) 来进行数据集的准备。
 
 ## 如何使用
 
 ### 训练
-1. 修改对应模型的config文件
+
+1. 修改`config`文件夹下对应模型的 .yaml 文件。
 2. 指定confing文件运行 `train.py`,例如： `python train.py -c configs/CSPN.yaml`
 
-* 也可以通过我们提供的脚本运行: `bash scripts/train_cspn.sh`.
+* 也可以通过我们提供的脚本运行来复现我们的结果: `bash scripts/train_cspn.sh`.
+
+### 测试
+
+1. 修改`config`文件夹下对应模型的 .yaml 文件。
+2. 下载我们提供的预训练模型，放置对应的目录下，如：`weights/cspn/model_best.pdparams`。
+3. 指定confing文件运行 `test.py`,例如： `python evaluate.py -c configs/CSPN.yaml`。
 
 ## 定制化算法
 
@@ -50,19 +59,18 @@ pip install -r requirements.txt
 
 ## 结果
 
-我们在KITTI以及NYU Depth V2上评测了 PaddleCompletion 已经实现的算法. 
-
-注意我们并没有通过额外的技巧来优化模型结果，因此你可以直接使用.sh的脚本文件来复现我们在表格中报告的精度
-
+我们在KITTI2015以及NYU Depth V2上评测了 PaddleCompletion 已经实现的算法。
+注意我们并没有通过额外的技巧来优化模型结果，因此你可以直接使用.sh的脚本文件来复现我们在表格中报告的精度。
 
 ### KITTI
 
-| Method    | RMSE    | MAE     | iRMSE | iMAE  | 
-|-----------| ------- | ------- | ----- | ----- | 
+| Method    | RMSE    | MAE     | iRMSE | iMAE  |
+|-----------| ------- | ------- | ----- | ----- |
 | `FCFRNet` | 784.224 | 222.639 | 2.370 | 1.014 |
 
 
 ### NYU Depth V2
+
 | Data            | RMSE   | REL    | DELTA1.02 | DELTA1.05 | DELTA1.10 |
 |-----------------| ------ | ------ | --------- | --------- | --------- |
 | `CSPN`          | 0.1111 | 0.0151 | 0.8416    | 0.9386    | 0.9729    |
@@ -71,7 +79,9 @@ pip install -r requirements.txt
 ## 贡献
 
 PaddleCompletion 工具箱目前还在积极维护与完善过程中。 我们非常欢迎外部开发者为Paddle Depth提供新功能\模型。 如果您有这方面的意愿的话，请往我们的邮箱或者issue里面反馈
+
 ## 感谢
+
 PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与贡献的开源项目。
 我们感谢所有为项目提供算法复现和新功能支持的贡献者，以及提供宝贵反馈的用户。 
 我们希望这个工具箱和基准测试可以为社区提供灵活的代码工具，供用户复现已有算法并开发自己的新模型，从而不断为开源社区提供贡献。
