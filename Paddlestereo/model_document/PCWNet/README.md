@@ -42,7 +42,7 @@ $ ./Scripts/start_test_kitti2012_stereo_net.sh
 Models will be open-sourced later
 
 ## Link
-we also provide the official pytorch implementation in this [website] (https://github.com/gallenszl/PCWNet)
+we also provide the official pytorch implementation in this [website](https://github.com/gallenszl/PCWNet)
 
 ## Citation
 If you find this code useful in your research, please cite:
