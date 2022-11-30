@@ -14,7 +14,7 @@ PaddleCompletion 是一款基于 PaddlePaddle 的深度信息补全工具箱，�
 
 
 1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
-2. [FCFRNet (AAAI2021)](model_document/CSPN/README.md)
+2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
