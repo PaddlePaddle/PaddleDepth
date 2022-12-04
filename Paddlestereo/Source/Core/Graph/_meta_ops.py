@@ -51,11 +51,11 @@ class MetaOps(UserModel):
             if not self.user_load_model(checkpoint, i):
                 ModelSaver.load_model(self._model[i], checkpoint, i)
             if not self.user_load_opt(checkpoint, i):
-                ModelSaver.lad_opt(self._opt[i], checkpoint, i)
+                ModelSaver.load_opt(self._opt[i], checkpoint, i)
 
     def show_lr_scheduler_info(self, idx: int) -> None:
         log.info((f'Model_{idx} Current lr: ' +
-                  str(self._opt[idx].param_groups[self.__OPT_LR_GROUP_ID]['lr'])))
+                  str(self._opt[idx].get_lr())))
 
     def count_parameter_num(self) -> None:
         for i, model_item in enumerate(self._model):
