@@ -60,3 +60,6 @@ You only need to specify the path of the training set in the configuration file,
 
 You can train on a custom monocular or stereo dataset by writing a new dataloader class which inherits from `MonoDataset` – see the `KITTIDataset` class in `datasets/kitti_dataset.py` for an example.
 
+## Testing data
+Please download the GT depth and put it in `PaddleMono/splits/eigen/` directory before executing the evaluation script.
+[GT_depth](https://drive.google.com/file/d/1D94FFJo2vf6obW4M6PfvSoYRh8a9nD9w/view?usp=sharing)
