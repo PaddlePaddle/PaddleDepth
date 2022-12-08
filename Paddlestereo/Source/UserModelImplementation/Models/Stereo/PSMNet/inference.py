@@ -44,10 +44,16 @@ class PSMNetInterface(ModelHandlerTemplate):
 
     def inference(self, model: list, input_data: list, model_id: int) -> list:
         pred1, pred2, pred3 = None, None, None
+        res = []
         if self.MODEL_ID == model_id:
-            pred1, pred2, pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+            if self.__args.mode == 'train':
+                pred1, pred2, pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+                res = [pred1, pred2, pred3]
+            else:
+                pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+                res = [pred3]
 
-        return [pred1, pred2, pred3]
+        return res
 
     def accuracy(self, output_data: list, label_data: list, model_id: int) -> list:
         # return acc
@@ -79,6 +85,7 @@ class PSMNetInterface(ModelHandlerTemplate):
                 # loss = jf.loss.SMLoss.smooth_l1(item, label_data[0],
                 #                                args.startDisp,
                 #                                args.startDisp + args.dispNum)
+                loss = paddle.fluid.layers.reduce_mean(loss, dim=0)
                 res.append(loss)
             total_loss = sum(res)
 

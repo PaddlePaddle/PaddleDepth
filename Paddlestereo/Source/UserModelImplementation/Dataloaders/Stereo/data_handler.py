@@ -254,8 +254,10 @@ class ImgIO(object):
         header = file.readline().decode('utf-8').rstrip()
         color = ImgIO.__get_color(header)
 
-        if (dim_match := re.match(r'^(\d+)\s(\d+)\s$',
-                                  file.readline().decode('utf-8'))):
+        dim_match = re.match(r'^(\d+)\s(\d+)\s$',
+                             file.readline().decode('utf-8'))
+
+        if dim_match:
             width, height = map(int, dim_match.groups())
         else:
             raise Exception('Malformed PFM header.')
