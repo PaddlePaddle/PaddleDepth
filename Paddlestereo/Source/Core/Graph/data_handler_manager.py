@@ -39,12 +39,12 @@ class DataHandlerManager(UserDataloader):
         training_dataset = self.user_get_train_dataset(is_training)
 
         if self.__args.mode == 'test':
-            shuffle = False
+            drop_last, shuffle = False, False
         else:
-            shuffle = True
+            drop_last, shuffle = True, True
 
         batch_sampler = paddle.io.DistributedBatchSampler(
-            training_dataset, batch_size=self.__args.batchSize, shuffle=shuffle, drop_last=False)
+            training_dataset, batch_size=self.__args.batchSize, shuffle=shuffle, drop_last=drop_last)
         training_dataloader = paddle.io.DataLoader(training_dataset,
                                                    batch_sampler=batch_sampler,
                                                    num_workers=self.__args.dataloaderNum)
@@ -52,11 +52,12 @@ class DataHandlerManager(UserDataloader):
 
     def __init_val_dataloader(self) -> object:
         val_dataset = self.user_get_val_dataset()
+        batch_sampler = paddle.io.DistributedBatchSampler(
+            val_dataset, batch_size=self.__args.batchSize, shuffle=False, drop_last=True)
         val_dataloader = paddle.io.DataLoader(val_dataset,
                                               batch_size=self.__args.batchSize,
-                                              shuffle=False,
-                                              num_workers=self.__args.dataloaderNum,
-                                              drop_last=True)
+                                              batch_sampler=batch_sampler,
+                                              num_workers=self.__args.dataloaderNum)
         return val_dataloader
 
     def __check_val_dataloader(self) -> object:
