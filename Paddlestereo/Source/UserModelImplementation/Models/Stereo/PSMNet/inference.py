@@ -28,13 +28,12 @@ class PSMNetInterface(ModelHandlerTemplate):
 
     def optimizer(self, model: list, lr: float) -> list:
         args = self.__args
-        opt = paddle.optimizer.Adam(learning_rate=lr,
-                                    parameters=model[PSMNetInterface.MODEL_ID].parameters())
 
-        if args.lr_scheduler:
-            sch = StereoLRScheduler(lr, [200, 300])
-        else:
-            sch = None
+        sch = StereoLRScheduler(lr, [200, 300]) if args.lr_scheduler else None
+
+        new_lr = sch if sch is not None else lr
+        opt = paddle.optimizer.Adam(learning_rate=new_lr,
+                                    parameters=model[PSMNetInterface.MODEL_ID].parameters())
 
         return [opt], [sch]
 
@@ -108,7 +107,7 @@ class PSMNetInterface(ModelHandlerTemplate):
     def load_opt(self, opt: object, checkpoint: dict, model_id: int) -> bool:
         # opt.load_state_dict(checkpoint['optimizer'])
         # jf.log.info("Model loaded successfully")
-        return False
+        return True
 
     def save_model(self, epoch: int, model_list: list, opt_list: list) -> dict:
         return None
