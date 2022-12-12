@@ -28,13 +28,11 @@ class PWCMNetInterface(ModelHandlerTemplate):
 
     def optimizer(self, model: list, lr: float) -> list:
         args = self.__args
-        opt = paddle.optimizer.Adam(learning_rate=lr,
-                                    parameters=model[PWCMNetInterface.MODEL_ID].parameters())
+        sch = StereoLRScheduler(lr, [200, 300]) if args.lr_scheduler else None
 
-        if args.lr_scheduler:
-            sch = StereoLRScheduler(lr, [200, 400])
-        else:
-            sch = None
+        new_lr = sch if sch is not None else lr
+        opt = paddle.optimizer.Adam(learning_rate=new_lr,
+                                    parameters=model[PWCMNetInterface.MODEL_ID].parameters())
 
         return [opt], [sch]
 
