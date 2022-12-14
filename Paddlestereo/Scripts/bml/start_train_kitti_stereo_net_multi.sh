@@ -4,7 +4,7 @@ CUDA_VISIBLE_DEVICES=${gou_id} python3 Source/main.py \
                         --mode train \
                         --batchSize 2 \
                         --gpu 1 \
-                        --trainListPath ./Datasets/Stereo/rob_training_list_aistudio.csv \
+                        --trainListPath ./Datasets/Stereo/rob_training_list_bml.csv \
                         --imgWidth 512 \
                         --imgHeight 256 \
                         --dataloaderNum 0 \
