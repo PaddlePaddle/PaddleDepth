@@ -2,7 +2,7 @@
 # parameter
 test_gpus_id=0
 eva_gpus_id=0
-test_list_path='./Datasets/Stereo/kitti2015_testing_list_aistudio.csv'
+test_list_path='./Datasets/Stereo/kitti2015_testing_list_bml.csv'
 evalution_format='training'
 
 rm -r ResultImg/
