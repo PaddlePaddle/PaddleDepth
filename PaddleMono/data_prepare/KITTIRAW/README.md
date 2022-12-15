@@ -45,21 +45,16 @@ We found that Ubuntu 18.04 defaults to `2x2,2x2,2x2`, which gives different resu
 
 You can also place the KITTI dataset wherever you like and point towards it with the `--data_path` flag during training and evaluation.
 
-##Testing data
-
 The train/test/validation splits are defined in the `splits/` folder.
 By default, the code will train a depth model using [Zhou's subset](https://github.com/tinghuiz/SfMLearner) of the standard Eigen split of KITTI, which is designed for monocular training.
 You can also train a model using the new [benchmark split](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction) or the [odometry split](http://www.cvlibs.net/datasets/kitti/eval_odometry.php) by setting the `--split` flag.
 
-**Note:** Please put the test set and the kitti training set in the same root directory, `eigen` is the test set, and `kitti` is the training set. 
-You only need to specify the path of the training set in the configuration file, and the path of the test set will be calculated automatically, so the name of test set must be `eigen`.
-
-[Download](https://aistudio.baidu.com/aistudio/datasetdetail/124009) the test set.
-
-##Custom dataset
-
-You can train on a custom monocular or stereo dataset by writing a new dataloader class which inherits from `MonoDataset` – see the `KITTIDataset` class in `datasets/kitti_dataset.py` for an example.
 
 ## Testing data
+
 Please download the GT depth and put it in `PaddleMono/splits/eigen/` directory before executing the evaluation script.
 [GT_depth](https://drive.google.com/file/d/1D94FFJo2vf6obW4M6PfvSoYRh8a9nD9w/view?usp=sharing)
+
+## Custom dataset
+
+You can train on a custom monocular or stereo dataset by writing a new dataloader class which inherits from `MonoDataset` – see the `KITTIDataset` class in `datasets/kitti_dataset.py` for an example.

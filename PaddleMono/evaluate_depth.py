@@ -86,7 +86,7 @@ def evaluate(opt, load_weight_floder=None):
         encoder_dict = load_weight_file(encoder_path)
 
         img_ext = '.png' if opt.png else '.jpg'
-        test_data_path = str(Path(opt.data_path).parent.joinpath("eigen"))
+        test_data_path = opt.data_path
         dataset = datasets.KITTIRAWDataset(test_data_path, filenames,
                                            opt.height, opt.width,
                                            [0], 4, is_train=False, img_ext=img_ext)
