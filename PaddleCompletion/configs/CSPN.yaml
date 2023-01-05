@@ -1,0 +1,49 @@
+# Model
+model_name: cspn_resnet50_nyu
+resnet_pretrain: True
+
+# Dataset
+dataset:
+  name: "NYU"
+  root: "./data/nyudepth_hdf5"
+  train_split: "train"
+  train_list_file: "train.csv"
+  val_split: "val"
+  val_list_file: "val.csv"
+  sample_num: 500 # number of sampled points for each depth image
+  resnet_pretrain: True
+
+# Optimizer related
+optimizer:
+  name: Momentum
+  lr: 1e-4
+  weight_decay: 1e-4
+  momentum: 0.9
+  nesterov: True
+
+# Scheduler related
+scheduler:
+  name: ReduceOnPlateau
+  mode: "min"
+  factor: 0.1
+  patience: 3
+  min_lr: 1e-5
+  epsilon: 1e-4
+
+# Others
+device: "gpu"
+num_workers: 4
+batch_size: 8
+epoch: 40
+log_dir: "./log"
+pretrain: "./weights/cspn/model_best.pdparams"
+save_path: "./weights/cspn"
+interval: 1
+
+# evaluation
+model_path: "./weights/cspn/model_best.pdparams"
+out_path: "./out/cspn"
+
+
+
+

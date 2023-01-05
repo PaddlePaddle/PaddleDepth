@@ -20,15 +20,15 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 - **公平对比**: 基于飞桨框架，在相同的训练策略和环境下公平比较了深度信息增强领域里面SOTA(state-of-the-art)的算法
 
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/57089550/202390252-14904fb8-ed4c-4316-ac11-f442607944de.png" width = "600" />
+    <img src="https://user-images.githubusercontent.com/57089550/202442392-84e9ab8b-de9d-489d-b6a8-944661e30b01.png" width = "600" />
 </div>
 
 ## ⚡ 快速开始
 > 点击下述超链接查看各个细分深度信息增强算法的使用方法
 - [深度图超分辨](./Depth_super_resolution/README_cn.md)
-- 深度补全
+- [深度补全](./PaddleCompletion/README_zh-CN.md)
 - [单目深度估计](./PaddleMono/README_zh-CN.md)
-- 双目深度估计
+- [双目深度估计](./Paddlestereo/README_zh-CN.md)
 
 
 <a name="效果展示"></a>
