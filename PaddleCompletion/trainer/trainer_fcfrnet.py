@@ -37,39 +37,28 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
         batch_data['d'][batch_data['d'] > 85] = 85
         batch_data['d'] /= 85.0
         batch_data["rgb"] /= 255.0
-        # print(batch_data['d'].max(), batch_data['rgb'].max())
         gt = batch_data['gt_depth'] if mode != 'test_prediction' and mode != 'test_completion' else None
 
         data_time = time.time() - start
 
         start = time.time()
-        pred = model(batch_data)  #################
-        # pred=batch_data['d']
-        # pred*=85
-        #     #print(pred.max(),pred.min())
-        #     #print(pred.max(), depth_pred.max(), lidar_pred.max(), global_features.max())
+        pred = model(batch_data) 
+    
         batch_data['d'] *= 85.0
         batch_data['rgb'] *= 255.0
-        #     #print(batch_data['d'].max(), batch_data['rgb'].max(), gt.max())
+       
         depth_loss, photometric_loss, smooth_loss, mask = 0, 0, 0, None
         if mode == 'train':
             # Loss 1: the direct depth supervision from ground truth label
             # mask=1 indicates that a pixel does not ground truth labels
             if 'sparse' in args.train_mode:
                 depth_loss = MaskedMSELoss()(pred, batch_data['d'])
-                # mask = (batch_data['d'] < 1e-3).float()
+                
                 mask = paddle.to_tensor(batch_data['d'] < 1e-3, dtype="float32")
             elif 'dense' in args.train_mode:
-                # res_gt = gt-batch_data['d']
-                # res_gt[gt==0]=0
-                # if i==0:
-                #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+10*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
-                # elif i==1:
-                #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+2*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
-                # else:
+               
                 depth_loss = MaskedMSELoss()(pred, gt)  # +depth_criterion(global_features, res_gt)
-                # depth_loss = depth_criterion(pred, gt)+0.1*depth_criterion(depth_pred, gt)+0.1*depth_criterion(lidar_pred, gt)+0.1*depth_criterion(global_features, res_gt)
-                # mask = (gt < 1e-3).float()
+              
                 mask = paddle.to_tensor((gt < 1e-3), dtype="float32")
             # Loss 2: the self-supervised photometric loss
             if args.use_pose:
@@ -121,10 +110,7 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
         if mode != 'train':
             pred[pred < 0.9] = 0.9
             pred[pred > 85] = 85
-            # pred[depth_pred<0.9] = 0.9
-            # pred[depth_pred>85] = 85
-            # pred[lidar_pred<0.9] = 0.9
-            # pred[lidar_pred>85] = 85
+           
         # measure accuracy and record loss
         with paddle.no_grad():
 
@@ -142,8 +128,7 @@ def iterate(mode, args, loader, model, optimize, logger, epoch):
             logger.conditional_save_img_comparison(mode, i, batch_data, pred,
                                                    epoch)
             logger.conditional_save_pred(mode, i, pred, epoch)
-        # if mode=='train':
-        #    break
+       
 
     avg = logger.conditional_save_info(mode, average_meter, epoch)
     is_best = logger.rank_conditional_save_best(mode, avg, epoch)
@@ -200,15 +185,9 @@ def iterate_val(mode, args, loader, model, optimizer, logger, epoch):
                 depth_loss = MaskedMSELoss()(pred, batch_data['d'])
                 mask = (batch_data['d'] < 1e-3).float()
             elif 'dense' in args.train_mode:
-                # res_gt = gt-batch_data['d']
-                # res_gt[gt==0]=0
-                # if i==0:
-                #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+10*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
-                # elif i==1:
-                #    depth_loss = depth_criterion(pred, gt)+2*depth_criterion(depth_pred, gt)+2*depth_criterion(lidar_pred, gt)#+depth_criterion(global_features, res_gt)
-                # else:
+                
                 depth_loss = MaskedMSELoss()(pred, gt)  # +depth_criterion(global_features, res_gt)
-                # depth_loss = depth_criterion(pred, gt)+0.1*depth_criterion(depth_pred, gt)+0.1*depth_criterion(lidar_pred, gt)+0.1*depth_criterion(global_features, res_gt)
+               
                 mask = (gt < 1e-3).float()
 
             # Loss 2: the self-supervised photometric loss
@@ -260,10 +239,7 @@ def iterate_val(mode, args, loader, model, optimizer, logger, epoch):
         if mode != 'train':
             pred[pred < 0.9] = 0.9
             pred[pred > 85] = 85
-            # depth_pred[depth_pred<0.9] = 0.9
-            # depth_pred[depth_pred>85] = 85
-            # lidar_pred[lidar_pred<0.9] = 0.9
-            # lidar_pred[lidar_pred>85] = 85
+            
         # measure accuracy and record loss
         with paddle.no_grad():
             mini_batch_size = next(iter(batch_data.values())).shape[0]
@@ -371,9 +347,7 @@ def FCFRNet_train(args):
 
     # create backups and results folder
     _logger = logger(args)
-    # if checkpoint is not None:
-    #     logger.best_result = checkpoint['best_result']
-    # print("=> logger created.")
+   
 
     if is_eval:
         print("=> starting model evaluation ...")
