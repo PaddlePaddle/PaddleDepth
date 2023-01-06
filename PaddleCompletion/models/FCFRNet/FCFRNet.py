@@ -33,13 +33,13 @@ def my_conv(tensor_image):
               [1, 1, 1, 1, 1],
               [1, 1, 1, 1, 1],
               [1, 1, 1, 1, 1]]
-    # kernel = torch.cuda.FloatTensor(kernel).expand(1, 1, 5, 5)
+   
     kernel = paddle.to_tensor(kernel, dtype="float32").expand((1, 1, 5, 5))
     # weight = ParamAttr(data=kernel, requires_grad=False)
     # 
-    param = paddle.create_parameter(shape=kernel.shape, dtype=str(kernel.numpy().dtype))  ####之前默认初始化当成设置处置
-    param.set_value(kernel)  ###############################new added #################
-    param.stop_gradient = True  # 等价于requires_grad=False 不进行求导
+    param = paddle.create_parameter(shape=kernel.shape, dtype=str(kernel.numpy().dtype)) 
+    param.set_value(kernel)  
+    param.stop_gradient = True  
 
     return F.conv2d(tensor_image, param, padding=2)
 
@@ -190,22 +190,22 @@ class DepthCompletionNet(nn.Layer):
             conv1 = self.conv1_img(x['g'])
 
         conv2 = self.conv2(conv1)  # Rcolor1
-        # print(f"conv2.shape:{conv2.shape}")
+        
         conv2_2 = self.conv2_2(conv1_2)  # Rd1
-        # print(f"conv2_2.shape:{conv2_2.shape}")
+        
         b, c, h, w = conv2.shape
-        cat_all = paddle.concat((conv2, conv2_2), 1)  ###?这是对应的哪个地方？############>>>>>??????>>>>????
-        # print(f"cat_all.shape:{cat_all.shape}")        # [1, 128, 1216, 352]====>b 2 c h w ??
-        cat_reshape = paddle.reshape(cat_all, (b, 2, c, h, w))  ### 为何#######################???>>>???>>>???
-        # print(f"cat_reshape.shape:{cat_reshape.shape}")
-        cat_transpose = paddle.transpose(cat_reshape, (0, 2, 1, 3, 4))  # b c 2 h w 这个2是啥
-        cat_view = paddle.reshape(cat_transpose, [b, -1, h, w])  #### b c 2 h w ====> b c h w >
-        # print(cat_view.shape)
+        cat_all = paddle.concat((conv2, conv2_2), 1)  
+               
+        cat_reshape = paddle.reshape(cat_all, (b, 2, c, h, w))  
+        
+        cat_transpose = paddle.transpose(cat_reshape, (0, 2, 1, 3, 4))  
+        cat_view = paddle.reshape(cat_transpose, [b, -1, h, w])  
+        
         # =========================> channel fuse  <======================
         conv2 = cat_view[:, :c, :, :]
-        conv2_2 = cat_view[:, c:, :, :]  # 不是叠起来再取出来？
+        conv2_2 = cat_view[:, c:, :, :]  
 
-        conv3 = self.conv3(conv2)  ### 调用conv2
+        conv3 = self.conv3(conv2)  
         conv3_2 = self.conv3_2(conv2_2)
         b, c, h, w = conv3.shape
         cat_all = paddle.concat((conv3, conv3_2), 1)
@@ -249,18 +249,18 @@ class DepthCompletionNet(nn.Layer):
         # decoder
         convt5 = self.convt5(conv6_all)
         y = paddle.concat((convt5, conv5, conv5_2), 1)
-        # print(f"y.shape:{y.shape}")
+        
         convt4 = self.convt4(y)
-        # y = torch.cat((convt4, conv4, conv4_2), 1)
+        
         y = paddle.concat((convt4, conv4, conv4_2), 1)
         convt3 = self.convt3(y)
-        # y = torch.cat((convt3, conv3, conv3_2), 1)
+        
         y = paddle.concat((convt3, conv3, conv3_2), 1)
         convt2 = self.convt2(y)
-        # y = torch.cat((convt2, conv2, conv2_2), 1)
+        
         y = paddle.concat((convt2, conv2, conv2_2), 1)
         convt1 = self.convt1(y)
-        # y = torch.cat((convt1, conv1, conv1_2), 1)
+        
         y = paddle.concat((convt1, conv1, conv1_2), 1)
         y = self.convtf(y)
 
