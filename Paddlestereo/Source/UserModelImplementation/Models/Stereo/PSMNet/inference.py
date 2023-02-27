@@ -28,13 +28,12 @@ class PSMNetInterface(ModelHandlerTemplate):
 
     def optimizer(self, model: list, lr: float) -> list:
         args = self.__args
-        opt = paddle.optimizer.Adam(learning_rate=lr,
-                                    parameters=model[PSMNetInterface.MODEL_ID].parameters())
 
-        if args.lr_scheduler:
-            sch = StereoLRScheduler(lr, [200, 300])
-        else:
-            sch = None
+        sch = StereoLRScheduler(lr, [200, 300]) if args.lr_scheduler else None
+
+        new_lr = sch if sch is not None else lr
+        opt = paddle.optimizer.Adam(learning_rate=new_lr,
+                                    parameters=model[PSMNetInterface.MODEL_ID].parameters())
 
         return [opt], [sch]
 
@@ -44,10 +43,16 @@ class PSMNetInterface(ModelHandlerTemplate):
 
     def inference(self, model: list, input_data: list, model_id: int) -> list:
         pred1, pred2, pred3 = None, None, None
+        res = []
         if self.MODEL_ID == model_id:
-            pred1, pred2, pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+            if self.__args.mode == 'train':
+                pred1, pred2, pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+                res = [pred1, pred2, pred3]
+            else:
+                pred3 = model(input_data[self.LEFT_IMG_ID], input_data[self.RIGHT_IMG_ID])
+                res = [pred3]
 
-        return [pred1, pred2, pred3]
+        return res
 
     def accuracy(self, output_data: list, label_data: list, model_id: int) -> list:
         # return acc
@@ -79,6 +84,7 @@ class PSMNetInterface(ModelHandlerTemplate):
                 # loss = jf.loss.SMLoss.smooth_l1(item, label_data[0],
                 #                                args.startDisp,
                 #                                args.startDisp + args.dispNum)
+                loss = paddle.fluid.layers.reduce_mean(loss, dim=0)
                 res.append(loss)
             total_loss = sum(res)
 
@@ -101,7 +107,7 @@ class PSMNetInterface(ModelHandlerTemplate):
     def load_opt(self, opt: object, checkpoint: dict, model_id: int) -> bool:
         # opt.load_state_dict(checkpoint['optimizer'])
         # jf.log.info("Model loaded successfully")
-        return False
+        return True
 
     def save_model(self, epoch: int, model_list: list, opt_list: list) -> dict:
         return None

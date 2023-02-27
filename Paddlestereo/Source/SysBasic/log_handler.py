@@ -31,8 +31,7 @@ class LogHandler(object):
         if renew and os.path.exists(path):
             os.remove(path)
         logging.basicConfig(level=logging.INFO, format=self.__info_format,
-                            datefmt = self.__data_format, filename = path, filemode = 'a',
-                            force=True)
+                            datefmt = self.__data_format, filename = path, filemode = 'a')
 
     def _disable_output_to_termimal(self) -> None:
         logger = logging.getLogger()

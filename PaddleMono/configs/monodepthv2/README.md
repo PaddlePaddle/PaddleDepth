@@ -30,9 +30,9 @@ You can use this checkpoint to reproduce the result of Monodepth2_640x192.
 
 [comment]: <> (You can use this checkpoint to reproduce the result of Monodepth2_640x192.)
 
-[Finetuning Model]()
+[Finetuning Model](https://drive.google.com/file/d/1OQDwQ0MI-XA2GDBsCr0E4CSc0BJPqnCB/view?usp=sharing)
 
-the finetuning model will be open-sourced later 
+You can use this checkpoint to reproduce the result of Monodepth2_1024x320. 
 
 [comment]: <> (You can use this checkpoint to reproduce the result of Monodepth2_1024x320.)
 

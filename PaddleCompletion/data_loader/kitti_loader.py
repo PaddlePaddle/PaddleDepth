@@ -38,7 +38,7 @@ def load_calib(fname):
     return K
 
 
-# 读取rgb图像
+
 def rgb_read(filename):
     assert os.path.exists(filename), "file not found: {}".format(filename)
     img_file = Image.open(filename)
@@ -48,7 +48,7 @@ def rgb_read(filename):
     return rgb_png
 
 
-# 读取深度图像
+
 def depth_read(filename):
     # loads depth map D from png file
     # and returns it as a numpy array,
@@ -69,7 +69,7 @@ def depth_read(filename):
 oheight, owidth = 352, 1216
 
 
-# 深度图像Dropout
+
 def drop_depth_measurements(depth, prob_keep):
     # depth pic  dropout
     mask = np.random.binomial(1, prob_keep, depth.shape)  # 符合mean=0
@@ -314,7 +314,7 @@ class KittiDepth(paddle.io.Dataset):
         rgb, sparse, target, rgb_near = self.__getraw__(index)
         rgb, sparse, target, rgb_near = self.transform(rgb, sparse, target,
                                                        rgb_near, self.args)
-        # print("first_____________>rgb:{sss}")
+        
         r_mat, t_vec = None, None
         if self.split == 'train' and self.args.use_pose:
             success, r_vec, t_vec = get_pose_pnp(rgb, rgb_near, sparse, self.K)
@@ -328,16 +328,16 @@ class KittiDepth(paddle.io.Dataset):
                 t_vec = np.zeros((3, 1))
                 r_mat = np.eye(3)
 
-        rgb, gray = handle_gray(rgb, self.args)  # 经过这个rgb会变成none
-        # print("second_____________>rgb:{222}")
+        rgb, gray = handle_gray(rgb, self.args)  
+        
         candidates = {"rgb": rgb, "d": sparse, "gt_depth": target, \
                       "g": gray, "r_mat": r_mat, "t_vec": t_vec, "rgb_near": rgb_near}
-        # print("-------------------->rgb:{}".format(candidates['rgb']))
+        
         items = {
             key: to_float_tensor(val)
             for key, val in candidates.items() if val is not None
         }
-        # print("=====================>item:{}".format(items))
+        
         return items
 
     def __len__(self):

@@ -11,7 +11,7 @@ class StereoLRScheduler(LRScheduler):
     def get_lr(self):
         new_lr = self.base_lr
         for item in self.stage:
-            if item < self.last_epoch:
+            if item <= self.last_epoch:
                 new_lr = new_lr * 0.1
             else:
                 return new_lr

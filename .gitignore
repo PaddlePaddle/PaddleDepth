@@ -1,3 +1,4 @@
+# paddle stereo
 ResultImg/
 Submission/
 Checkpoint/
@@ -5,7 +6,6 @@ log/
 Example/
 Result*/
 /*__pycache__*/
-
 sftp-config*.json
 *.pyc
 .DS_Store
