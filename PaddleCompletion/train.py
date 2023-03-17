@@ -14,7 +14,7 @@ def main():
 
     if configs.model_name == "fcfrnet":
         from trainer.trainer_fcfrnet import FCFRNet_train as trainer
-        configs.evaluate = None
+        #configs.evaluate = None
         assert configs.train_mode in ["dense", "sparse", "photo", "sparse+photo",
                                       "dense+photo"], "train mode only can be \"dense\", \"sparse\", \"photo\", \"sparse+photo\", \"dense+photo\""
         assert configs.val in ["select", "full"], "val mode only can be \"select\", \"full\""
@@ -22,6 +22,8 @@ def main():
                                                  'gd'], "input mode only can be \'d\', \'rgb\', \'rgbd\', \'g\', \'gd\'"
     elif configs.model_name == "cspn_resnet50_nyu":
         from trainer.trainer_cspn import train as trainer
+    elif configs.model_name == "STDNet":
+        from trainer.trainer_std import STD_train as trainer
     else:
         raise NotImplementedError("model {} is not implemented".format(configs.model_name))
     trainer(configs)
