@@ -15,7 +15,7 @@ As initial version, we support the following algoirthms. We are working on more 
 
 1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
-
+3. [STD (ICRA2019)](model_document/FCFRNet/README.md)
 Please click the hyperlink of each algorithm for more detailed explanation.
 
 ## Installation
@@ -69,7 +69,7 @@ You can easily reproduce our results using provided shell scripts!
 | Method    | RMSE    | MAE     | iRMSE | iMAE  |
 |-----------| ------- | ------- | ----- | ----- |
 | `FCFRNet` | 784.224 | 222.639 | 2.370 | 1.014 |
-
+| `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
 
 ### NYU Depth V2
 
