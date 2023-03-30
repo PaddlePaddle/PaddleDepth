@@ -4,10 +4,11 @@ A paddle implementation of the paper Self-Supervised Sparse-to-Dense:self-Superv
 
 [\[ICRA 2019\]]([https://openaccess.thecvf.com/content/CVPR2021/html/Shen_CFNet_Cascade_and_Fused_Cost_Volume_for_Robust_Stereo_Matching_CVPR_2021_paper.html](https://arxiv.org/pdf/1807.00275.pdf))
 
+when you train this model in 'gd',you will get the following reslut.You also can use torch2paddle weight to evaluate and visualize this result.
 
-| rgb            | input depth            | pred dense dpeth        | 
+| gray            | input depth            | pred dense dpeth        | 
 |----------------|------------------------|-------------------------|
-| ![](./stdg.png) | ![](./stdd.png) | ![](./stdds.png) |
+| ![](./images/stdg.png) | ![](./images/stdd.png) | ![](./images/stdds.png) |
 
 
 
@@ -20,11 +21,23 @@ A paddle implementation of the paper Self-Supervised Sparse-to-Dense:self-Superv
 
 ## Abstract
 
-Depth completion, the technique of estimating a dense depth image from sparse depth measurements, has a variety of applications in robotics and autonomous driving. However, depth completion faces 3 main challenges: the irregularly spaced pattern in the sparse depth input, the difficulty in handling multiple sensor modalities (when color images are available), as well as the lack of dense, pixel-level ground truth depth labels.  In this work, we address all these challenges. Specifically, we develop a deep regression model to learn a direct mapping from sparse depth (and color images) to dense depth. We also propose a self-supervised training framework that requires only sequences of color and sparse depth images,
-without the need for dense depth labels. Our experiments demonstrate that our network, when trained with semi-dense annotations, attains state-of-theart accuracy and is the winning approach on the KITTI depth completion benchmark2 at the time of submission. Furthermore, the self-supervised framework outperforms a numb
-
-
-
+Depth completion, the technique of estimating a
+dense depth image from sparse depth measurements, has a
+variety of applications in robotics and autonomous driving.
+However, depth completion faces 3 main challenges: the irregularly spaced pattern in the sparse depth input, the difficulty in
+handling multiple sensor modalities (when color images are
+available), as well as the lack of dense, pixel-level ground
+truth depth labels for training. In this work, we address all
+these challenges. Specifically, we develop a deep regression
+model to learn a direct mapping from sparse depth (and color
+images) input to dense depth prediction. We also propose a selfsupervised training framework that requires only sequences of
+color and sparse depth images, without the need for dense depth
+labels. Our experiments demonstrate that the self-supervised
+framework outperforms a number of existing solutions trained
+with semi-dense annotations. Furthermore, when trained with
+semi-dense annotations, our network attains state-of-the-art
+accuracy and is the winning approach on the KITTI depth
+completion benchmark1 at the time of submission.
 
 
 ## Dataset
@@ -82,30 +95,28 @@ Please make sure you move `train-001` to `train-007` files to `train` folder ,an
 
 ## Training
 
+**KITTI Depth dataset training**
+
+Run the script `sh ./scripts/train_std.sh` to train on KITTI Depth  dataset.
+
 ```bash
 
 python train.py -c configs/STD.yaml
 
 ```
 
+You can use VisualDL to visualize the training process.
+Run the script `visualdl --logdir ./log`
 
 
 ## Evaluation
 
+Run the script `sh ./scripts/evaluate_std.sh` to test the trained model on KITTI Depth dataset and visualize the results.
+The visualization results are saved in `./out/`.
 
-
-**Important**:for evaluation , you need to download sparse to coarse depth val image  from [this website](https://aistudio.baidu.com/aistudio/datasetdetail/175535/0)
+**Important** : for evaluation , you need to download pretrained weight  from [this website](https://aistudio.baidu.com/aistudio/datasetdetail/202399)
 
 and employ it as input of the proposed network.
-
-
-
-[comment]: <> (We use the result of )
-
-
-
-[comment]: <> (.you need it to replace sparse depth input image.Besides,you aslo need to download weight from [this]&#40;https://aistudio.baidu.com/aistudio/datasetdetail/176607&#41;)
-
 
 
 you can run this 
@@ -129,5 +140,22 @@ python evaluate.py -c ./model_document/STD/STD.yaml
 You can use this checkpoint to reproduce our reported result.
 
 
+## Citation
 
+If you find this code useful in your research, please cite:
+
+```
+@article{ma2018self,
+	title={Self-supervised Sparse-to-Dense: Self-supervised Depth Completion from LiDAR and Monocular Camera},
+	author={Ma, Fangchang and Cavalheiro, Guilherme Venturelli and Karaman, Sertac},
+	booktitle={ICRA},
+	year={2019}
+}
+@article{Ma2017SparseToDense,
+	title={Sparse-to-Dense: Depth Prediction from Sparse Depth Samples and a Single Image},
+	author={Ma, Fangchang and Karaman, Sertac},
+	booktitle={ICRA},
+	year={2018}
+}
+```
 
