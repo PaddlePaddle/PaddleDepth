@@ -1,4 +1,4 @@
-# FCFRNet(AAAI2021)
+# STD(ICRA2019)
 
 A paddle implementation of the paper Self-Supervised Sparse-to-Dense:self-Supervised Depth Completion from LiDAR and Monocular Camera
 
@@ -8,11 +8,10 @@ A paddle implementation of the paper Self-Supervised Sparse-to-Dense:self-Superv
 
 
 
-| rgb            | input depth            | pred dense dpeth        | groundtruth            |
+| rgb            | input depth            | pred dense dpeth        |
+|----------------|------------------------|-------------------------|
 
-|----------------|------------------------|-------------------------|------------------------|
-
-| ![](./rgb.jpg) | ![](./input_depth.jpg) | ![](./result_depth.jpg) | ![](./groundturth.jpg) |
+| ![](./stdg.png) | ![](./stdd.png) | ![](./stdd.png) |
 
 
 
@@ -128,7 +127,7 @@ python evaluate.py -c ./model_document/STD/STD.yaml
 
 
 
-[Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/176607)
+[Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/202399)
 
 You can use this checkpoint to reproduce our reported result.
 
