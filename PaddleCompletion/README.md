@@ -15,8 +15,8 @@ As initial version, we support the following algoirthms. We are working on more 
 
 1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
-3. [STD (ICRA2019)](model_document/FCFRNet/README.md)
-Please click the hyperlink of each algorithm for more detailed explanation.
+3. [STD (ICRA2019)](model_document/STD/README.md)
+
 
 ## Installation
 
