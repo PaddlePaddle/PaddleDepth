@@ -1,18 +1,14 @@
-# FCFRNet(AAAI2021)
+# STD(ICRA2019)
 
 A paddle implementation of the paper Self-Supervised Sparse-to-Dense:self-Supervised Depth Completion from LiDAR and Monocular Camera
 
 [\[ICRA 2019\]]([https://openaccess.thecvf.com/content/CVPR2021/html/Shen_CFNet_Cascade_and_Fused_Cost_Volume_for_Robust_Stereo_Matching_CVPR_2021_paper.html](https://arxiv.org/pdf/1807.00275.pdf))
 
 
+| rgb            | input depth            | pred dense dpeth        | 
+|----------------|------------------------|-------------------------|
+| ![](./stdg.png) | ![](./stdd.png) | ![](./stdds.png) |
 
-
-
-| rgb            | input depth            | pred dense dpeth        | groundtruth            |
-
-|----------------|------------------------|-------------------------|------------------------|
-
-| ![](./rgb.jpg) | ![](./input_depth.jpg) | ![](./result_depth.jpg) | ![](./groundturth.jpg) |
 
 
 
@@ -128,7 +124,7 @@ python evaluate.py -c ./model_document/STD/STD.yaml
 
 
 
-[Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/176607)
+[Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/202399)
 
 You can use this checkpoint to reproduce our reported result.
 
