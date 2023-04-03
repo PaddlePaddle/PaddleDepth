@@ -100,6 +100,8 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 
 [2] [FCFRNet: Fast and Convergent Feature Refinement Network for Depth Completion](https://doi.org/10.1609/aaai.v35i3.16311)
 
+[3] [STD: Self-Supervised Sparse-to-Dense: Self-Supervised Depth Completion from LiDAR and Monocular Camera](https://arxiv.org/pdf/1807.00275.pdf)
+
 [comment]: <> (## Citation)
 
 [comment]: <> (If you think this toolkit or the results are helpful to you and your research, please cite us!)

@@ -5,7 +5,7 @@ A paddle implementation of the paper FCFRNet:A paddle implementation of the pape
 
 | rgb            | input depth            | pred dense dpeth        | groundtruth            |
 |----------------|------------------------|-------------------------|------------------------|
-| ![](./rgb.jpg) | ![](./input_depth.jpg) | ![](./result_depth.jpg) | ![](./groundturth.jpg) |
+| ![](./images/rgb.jpg) | ![](./images/input_depth.jpg) | ![](./images/result_depth.jpg) | ![](./images/groundturth.jpg) |
 
 
 </font>
@@ -68,8 +68,14 @@ train-002《====》2011_09_28_drive_0016_sync
 **Note**:Besides you need to know that the zip file only include dense depth input image.You need to download rgb and groundtruth image form [KITTI Raw Website](http://www.cvlibs.net/datasets/kitti/raw_data.php) and [KITTI official Website](http://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_completion).
 
 ## Training
-The training code of FCFRNet will be open-sourced later.
 
+**Important Note** : You need to download Coarse map (which predicted by STD) from the URL above.
+
+
+you can run this 
+```bash
+python evaluate.py -c ./model_document/FCFRNet/FCFRNet.yaml
+```
 ## Evaluation
 
 **Important**:for evaluation , you need to download sparse to coarse depth val image  from [this website](https://aistudio.baidu.com/aistudio/datasetdetail/175535/0)
@@ -90,4 +96,30 @@ python evaluate.py -c ./model_document/FCFRNet/FCFRNet.yaml
 [Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/176607)
 You can use this checkpoint to reproduce our reported result.
 
+## Citation
+
+If you find this code useful in your research, please cite:
+
+```
+@article{DBLP:journals/corr/abs-2012-08270,
+  author    = {Lina Liu and
+               Xibin Song and
+               Xiaoyang Lyu and
+               Junwei Diao and
+               Mengmeng Wang and
+               Yong Liu and
+               Liangjun Zhang},
+  title     = {FCFR-Net: Feature Fusion based Coarse-to-Fine Residual Learning for
+               Monocular Depth Completion},
+  journal   = {CoRR},
+  volume    = {abs/2012.08270},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2012.08270},
+  eprinttype = {arXiv},
+  eprint    = {2012.08270},
+  timestamp = {Tue, 10 Aug 2021 17:46:20 +0200},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2012-08270.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
 
