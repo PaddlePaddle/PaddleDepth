@@ -266,12 +266,20 @@ def get_folder_name(args):
                                                args.w2)
     else:
         prefix = "mode={}.".format(args.train_mode)
-    return os.path.join(args.result,
-        prefix + 'input={}.resnet{}.lr={}.bs={}.wd={}.pretrained={}.jitter={}.time={}'.
-        format(args.dataset['input_mode'], args.layers,  \
-            args.optimizer['lr'], args.batch_size, args.optimizer['weight_decay'], \
-            args.pretrained, args.dataset['jitter'], current_time
-            ))
+    if args.model_name == "guidenet":
+        return os.path.join(args.result,
+            prefix + 'input={}.lr={}.bs={}.wd={}.pretrained={}.jitter={}.time={}'.
+            format(args.dataset['input_mode'], \
+                args.lr_config.MultiStepDecay['learning_rate'], args.batch_size, args.optimizer['weight_decay'], \
+                args.pretrained, args.dataset['jitter'], current_time
+                )) 
+    else:
+        return os.path.join(args.result,
+            prefix + 'input={}.resnet{}.lr={}.bs={}.wd={}.pretrained={}.jitter={}.time={}'.
+            format(args.dataset['input_mode'], args.layers,  \
+                args.optimizer['lr'], args.batch_size, args.optimizer['weight_decay'], \
+                args.pretrained, args.dataset['jitter'], current_time
+                ))
 
 
 avgpool = paddle.nn.AvgPool2D(kernel_size=2, stride=2)

@@ -24,6 +24,8 @@ def main():
         from trainer.trainer_cspn import train as trainer
     elif configs.model_name == "STDNet":
         from trainer.trainer_std import STD_train as trainer
+    elif configs.model_name == "guidenet":
+        from trainer.trainer_guidenet import GuideNet_train as trainer
     else:
         raise NotImplementedError("model {} is not implemented".format(configs.model_name))
     trainer(configs)
