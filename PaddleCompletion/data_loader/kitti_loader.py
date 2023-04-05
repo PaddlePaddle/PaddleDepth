@@ -207,7 +207,7 @@ def get_paths_and_transform(split, args):
             glob_d = os.path.join(
                 args.dataset['data_folder'],
                 # 'data_depth_velodyne/val/*_sync/proj_depth/velodyne_raw/image_0[2,3]/*.png')
-                'val/*_sync/proj_depth/groundtruth/image_0[2,3]/*.png')
+                'val/*_sync/proj_depth/velodyne_raw/image_0[2,3]/*.png')
             # )
 
             glob_gt = os.path.join(
