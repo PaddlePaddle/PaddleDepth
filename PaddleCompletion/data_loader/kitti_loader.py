@@ -60,7 +60,7 @@ def depth_read(filename):
     # make sure we have a proper 16bit depth map here.. not 8bit!
     assert np.max(depth_png) > 255, \
         "np.max(depth_png)={}, path={}".format(np.max(depth_png), filename)
-    depth = depth_png.astype(np.float) / 256.
+    depth = depth_png.astype(float) / 256.
     # depth[depth_png == 0] = -1.
     depth = np.expand_dims(depth, -1)
     return depth
@@ -207,7 +207,7 @@ def get_paths_and_transform(split, args):
             glob_d = os.path.join(
                 args.dataset['data_folder'],
                 # 'data_depth_velodyne/val/*_sync/proj_depth/velodyne_raw/image_0[2,3]/*.png')
-                'val/*_sync/proj_depth/groundtruth/image_0[2,3]/*.png')
+                'val/*_sync/proj_depth/velodyne_raw/image_0[2,3]/*.png')
             # )
 
             glob_gt = os.path.join(
@@ -217,7 +217,7 @@ def get_paths_and_transform(split, args):
 
             def get_rgb_paths(p):
                 ps = p.split('/')
-                pnew = '/'.join(ps[:-7] +
+                pnew = '/'.join([args.dataset['data_folder']] +
                                 ps[-6:-4] + ps[-2:-1] + ['data'] + ps[-1:])
                 return pnew
         elif args.val == "select":

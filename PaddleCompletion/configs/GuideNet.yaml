@@ -1,0 +1,45 @@
+# Model
+model_name: guidenet
+
+# Dataset
+dataset:
+    name: "KITTI"
+    data_folder: "datasets/kitti/data_depth_velodyne"
+    input_mode: "rgbd"
+    jitter: 0.1
+    calib_path: "utils/calib_cam_to_cam.txt"
+
+lr_config:
+  MultiStepDecay:
+    learning_rate: 0.001
+    milestones:
+      - 5
+      - 10
+      - 15
+    gamma: 0.5
+
+# Optimizer
+optimizer:
+    name: AdamW
+    weight_decay: 0.005
+
+
+# Training related
+epochs: 20
+start_epoch: 0
+resume: None
+train_mode: dense
+pretrained: None
+# Val mode
+val: full
+# Important setting####
+evaluate: 
+# for test: evaluate: bestmodel.pdparams
+#######################
+rank_metric: rmse
+
+
+# Others
+workers: 4
+batch_size: 4
+print_freq : 10
