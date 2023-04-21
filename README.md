@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[English](README.md)| [简体中文](README_ch.md)
+English | [简体中文](README_ch.md)
 
 </div>
 
@@ -34,7 +34,7 @@ https://user-images.githubusercontent.com/57089550/202428765-121ec2d8-2ecc-4b2e-
 - [stereo depth estimation](./Paddlestereo/README.md)
 
 
-<a name="效果展示"></a>
+<a name="Visualization"></a>
 
 ## 👀 Visualization
 
