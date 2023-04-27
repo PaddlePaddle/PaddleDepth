@@ -5,7 +5,7 @@ layers: 34
 dataset:
     name: "KITTI"
     data_folder: "/opt/data/private/kitti_all"
-    input_mode: "rgbd"
+    input_mode: "gd"
     jitter: 0.1
     calib_path: "./utils/calib_cam_to_cam.txt"
 
