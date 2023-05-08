@@ -11,7 +11,7 @@ dataset:
 
 lr_config:
   MultiStepDecay:
-    learning_rate: 0.001
+    learning_rate: 0.0005
     milestones:
       - 5
       - 10
@@ -31,15 +31,15 @@ resume: None
 train_mode: dense
 pretrained: None
 # Val mode
-val: full
+val: select
 # Important setting####
 evaluate: 
-# for test: evaluate: bestmodel.pdparams
+# for test: evaluate: model_best.pdparams
 #######################
 rank_metric: rmse
 
 
 # Others
-workers: 4
-batch_size: 4
+workers: 8
+batch_size: 8
 print_freq : 10
