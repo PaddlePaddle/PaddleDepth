@@ -144,5 +144,5 @@ If you would like to implement new features, please submit a issue or emails to 
 
 ## Contact
 
-- [Yuanhang Kong](https://github.com/kongdebug): 2111330@tongji.edu.cn
+- [Yuanhang Kong](https://github.com/kongdebug): KeyK@foxmail.com
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@baidu.com

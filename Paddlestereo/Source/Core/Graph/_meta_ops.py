@@ -50,8 +50,9 @@ class MetaOps(UserModel):
         for i, _ in enumerate(self._model):
             if not self.user_load_model(checkpoint, i):
                 ModelSaver.load_model(self._model[i], checkpoint, i)
-            if not self.user_load_opt(checkpoint, i):
-                ModelSaver.load_opt(self._opt[i], checkpoint, i)
+            if self.__args.mode == "train":
+                if not self.user_load_opt(checkpoint, i):
+                    ModelSaver.load_opt(self._opt[i], checkpoint, i)
 
     def show_lr_scheduler_info(self, idx: int) -> None:
         log.info((f'Model_{idx} Current lr: ' +
@@ -82,7 +83,7 @@ class MetaOps(UserModel):
         model_dict = self.user_save_model(epoch)
         if model_dict is None:
             model_dict = ModelSaver.construct_model_dict(epoch, self._model, self._opt)
-        ModelSaver.save(self.__args.modelDir, file_name, model_dict)
+        ModelSaver.save(self.__args.outputDir, file_name, model_dict)
 
     def set_model_mode(self, is_training: bool = True) -> None:
         assert self._model is not None

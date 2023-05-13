@@ -15,8 +15,11 @@ class FileHandler(object):
         # new folder
         path = path.strip()
         path = path.rstrip("\\")
-        if not os.path.exists(path):
-            os.makedirs(path)
+        try:
+            if not os.path.exists(path):
+                os.makedirs(path)
+        except OSError:
+            pass
 
     @staticmethod
     def open_file(path: str, is_continue: bool = True) -> object:
