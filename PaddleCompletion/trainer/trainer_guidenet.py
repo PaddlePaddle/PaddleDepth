@@ -291,7 +291,7 @@ def GuideNet_train(args):
                   end='')
             checkpoint = paddle.load(args.resume)
             args.start_epoch = checkpoint['epoch'] + 1
-            args.data_folder = args_new.data_folder
+            args.data_folder = args_new.dataset['data_folder']
             args.val = args_new.val
             print("Completed. Resuming from epoch {}.".format(
                 checkpoint['epoch']))
@@ -311,9 +311,8 @@ def GuideNet_train(args):
 
     print("completed.")
     if checkpoint is not None:
-        # params_state = paddle.load(path=checkpoint)
-        model.set_dict(checkpoint)
-        # optim.load(checkpoint['optimizer'])
+        model.set_dict(checkpoint["model"])
+        optim.set_state_dict(checkpoint["optimizer"])
         print("=> checkpoint state loaded.")
 
     model = paddle.DataParallel(model)
@@ -345,6 +344,9 @@ def GuideNet_train(args):
         iterate("train", args, train_loader, model, optim, _logger, epoch)  # train for one epoch
         result, is_best = iterate_val("val", args, val_loader, model, None, _logger,
                                       epoch)  # evaluate on validation set
+        
+        scheduler.step()
+
         save_checkpoint({  # save checkpoint
             'epoch': epoch,
             'model': model.state_dict(),

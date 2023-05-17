@@ -16,6 +16,7 @@ PaddleCompletion 是一款基于 PaddlePaddle 的深度信息补全工具箱，�
 1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
 3. [STD (ICRA2019)](model_document/STD/README.md)
+4. [GuideNet (IEEE Transactions on Image Processing)](model_document/GuideNet/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
@@ -69,7 +70,7 @@ PaddleCompletion 基于 PaddlePaddle 2.3.2 版本开发，请使用 python 3.9 �
 |-----------| ------- | ------- | ----- | ----- |
 | `FCFRNet` | 784.224 | 222.639 | 2.370 | 1.014 |
 | `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
-
+| `GuideNet` | 745.41 | 227.95 | 2.48 | 1.09 |
 
 ### NYU Depth V2
 
@@ -95,6 +96,8 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 [2] [FCFRNet: Fast and Convergent Feature Refinement Network for Depth Completion](https://doi.org/10.1609/aaai.v35i3.16311)
 
 [3] [STD: Self-Supervised Sparse-to-Dense: Self-Supervised Depth Completion from LiDAR and Monocular Camera](https://arxiv.org/pdf/1807.00275.pdf)
+
+[4] [GuideNet: Learning guided convolutional network for depth completion](https://arxiv.org/abs/1908.01238)
 
 [comment]: <> (## Citation)
 
