@@ -35,9 +35,12 @@ class TrainProc(MetaMode):
             total_iteration = iteration + off_set
             self.__training_data_proc(batch_data, total_iteration, is_training)
             self._show_iteration_result(total_iteration, training_iteration, epoch)
+            if self.__args.iter_update:
+                self._adjust_lr_scheduler_and_post_proc(epoch, is_training)
 
         self._show_epoch_result(epoch, total_iteration, training_iteration)
-        self._adjust_lr_scheduler_and_post_proc(epoch, is_training)
+        if not self.__args.iter_update:
+            self._adjust_lr_scheduler_and_post_proc(epoch, is_training)
         return total_iteration
 
     def __executor_training_proc(self, epoch: int) -> None:

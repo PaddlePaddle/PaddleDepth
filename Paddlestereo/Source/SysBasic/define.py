@@ -25,7 +25,7 @@ MODEL_NAME = 'Default_Model'
 CHECK_POINT_LIST_NAME = 'checkpoint.list'
 # Checkpoint's name
 # model_epoch.pth
-CHECK_POINT_NAME = 'model_epoch_%d.pth'
+CHECK_POINT_NAME = 'model_epoch_%d.pdparams'
 #
 LAST_MODEL_NAME = 'last model name:'
 

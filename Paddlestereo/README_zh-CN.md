@@ -15,6 +15,7 @@ PaddleStereo 是一款基于 PaddlePaddle 的双目深度估计工具箱，是 P
 
 1. [PCWNet (ECCV2022)[1]](model_document/PCWNet/README.md)
 2. [PSMNet (CVPR2018)[2]](model_document/PSMNet/README.md)
+3. [RAFT-Stereo (3DV2021)[3]](model_document/RAFT-Stereo/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
@@ -107,6 +108,9 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 
 [2] Chang, Jia-Ren, and Yong-Sheng Chen. "Pyramid stereo matching network." Proceedings of the IEEE conference on computer vision and pattern recognition. 2018.
 
+[3] Lipson, Lahav, Zachary Teed, and Jia Deng. “RAFT-Stereo: Multilevel Recurrent Field Transforms for Stereo Matching.” arXiv, September 15, 2021. 
+
+
 [comment]: <> (## Citation)
 
 [comment]: <> (If you think this toolkit or the results are helpful to you and your research, please cite us!)
@@ -131,3 +135,4 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@pku.edu.cn
 - [Rao Zhibo](https://github.com/RaoHaocheng): raoxi36@foxmail.com
+- [Yuanhang Kong](https://github.com/kongdebug): KeyK@foxmail.com

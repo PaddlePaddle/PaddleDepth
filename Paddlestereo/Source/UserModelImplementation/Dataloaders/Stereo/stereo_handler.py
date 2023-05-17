@@ -7,11 +7,11 @@ import time
 import cv2
 
 try:
-    from .stereo_augmentation import Augmentor
+    from .stereo_augmentation import Augmentor, SparseFlowAugmentor
     from .mask_augmentation import MaskAug
     from .data_handler import DataAugmentation, ImgIO, Switch
 except ImportError:
-    from stereo_augmentation import Augmentor
+    from stereo_augmentation import Augmentor, SparseFlowAugmentor
     from mask_augmentation import MaskAug
     from data_handler import DataAugmentation, ImgIO, Switch
 
@@ -44,23 +44,44 @@ class StereoHandler(object):
                             gt_dsp_path: str) -> tuple:
         args = self.__args
         left_img, right_img, gt_dsp = self._read_data(left_img_path, right_img_path, gt_dsp_path)
-        gt_dsp = np.expand_dims(gt_dsp, axis=2)
-        left_img, right_img, gt_dsp = DataAugmentation.random_crop(
-            [left_img, right_img, gt_dsp],
-            left_img.shape[1], left_img.shape[0], args.imgWidth, args.imgHeight)
 
-        # left_img, right_img, gt_dsp, _ = self.augmentor(left_img, right_img, gt_dsp)
-        # left_img_mask, mask = self.mask_aug(left_img)
+        if self.__args.modelName == "RAFT_STEREO":
+            self.augmentor = SparseFlowAugmentor(crop_size=[args.imgHeight, args.imgWidth])
+            left_img = left_img.astype(np.uint8)
+            right_img = right_img.astype(np.uint8)
+            disp = gt_dsp.astype(np.float32)
+            valid = disp > 0.0
+            flow = np.stack([-disp, np.zeros_like(disp)], axis=-1)
 
-        left_img, right_img = DataAugmentation.standardize(left_img), \
-            DataAugmentation.standardize(right_img)
-        # left_img_mask = DataAugmentation.standardize(left_img_mask)
+            if len(left_img.shape) == 2:
+                left_img = np.tile(left_img[...,None], (1, 1, 3))
+                right_img = np.tile(right_img[...,None], (1, 1, 3))
+            else:
+                left_img = left_img[..., :3]
+                right_img = right_img[..., :3]
 
-        left_img, right_img = left_img.transpose(2, 0, 1), right_img.transpose(2, 0, 1)
-        gt_dsp = np.squeeze(gt_dsp, axis=2)
-        #left_img_mask = left_img_mask.transpose(2, 0, 1)
+            left_img, right_img, flow, valid = self.augmentor(left_img, right_img, flow, valid)
+            left_img = left_img.transpose(2, 0, 1).astype('float32')
+            right_img = right_img.transpose(2, 0, 1).astype('float32')
+            flow = flow.transpose(2, 0, 1).astype('float32')
+            flow = flow[:1]
+            flow[np.isinf(flow)] = 0
+            gt_dsp = np.stack([np.squeeze(flow, axis=0), valid.astype('float32')], axis=-1)
+        else:
+            gt_dsp = np.expand_dims(gt_dsp, axis=2)
+            left_img, right_img, gt_dsp = DataAugmentation.random_crop(
+                [left_img, right_img, gt_dsp],
+                left_img.shape[1], left_img.shape[0], args.imgWidth, args.imgHeight)
+            
+            left_img, right_img = DataAugmentation.standardize(left_img), \
+                DataAugmentation.standardize(right_img)
 
-        gt_dsp[np.isinf(gt_dsp)] = 0
+
+            left_img, right_img = left_img.transpose(2, 0, 1), right_img.transpose(2, 0, 1)
+            gt_dsp = np.squeeze(gt_dsp, axis=2)
+            #left_img_mask = left_img_mask.transpose(2, 0, 1)
+
+            gt_dsp[np.isinf(gt_dsp)] = 0
         return left_img, right_img, gt_dsp, left_img
         # return left_img_mask, right_img, \
         #    gt_dsp.astype('float32') * mask.astype('float32'), left_img.astype('float32')
@@ -87,9 +108,6 @@ class StereoHandler(object):
         right_img = np.lib.pad(right_img, ((top_pad, 0), (0, left_pad), (0, 0)),
                                mode='constant', constant_values=0)
 
-        left_img = left_img.transpose(2, 0, 1)
-        right_img = right_img.transpose(2, 0, 1)
-
         return left_img, right_img, top_pad, left_pad
 
     def _read_testing_data(self, left_img_path: str,
@@ -100,10 +118,18 @@ class StereoHandler(object):
         left_img = np.array(self.__img_read_func(left_img_path, True))
         right_img = np.array(self.__img_read_func(right_img_path, True))
 
-        left_img = DataAugmentation.standardize(left_img)
-        right_img = DataAugmentation.standardize(right_img)
+        if self.__args.modelName == "RAFT_STEREO":
+            left_img = left_img.astype(np.float32)
+            right_img = right_img.astype(np.float32)
+            top_pad, left_pad = 0, 0
+        else:           
+            left_img = DataAugmentation.standardize(left_img)
+            right_img = DataAugmentation.standardize(right_img)
 
-        left_img, right_img, top_pad, left_pad = self._img_padding(left_img, right_img)
+            left_img, right_img, top_pad, left_pad = self._img_padding(left_img, right_img)
+
+        left_img = left_img.transpose(2, 0, 1)
+        right_img = right_img.transpose(2, 0, 1)
 
         gt_dsp = None
         if gt_dsp_path is not None:

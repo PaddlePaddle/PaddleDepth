@@ -16,6 +16,7 @@ As initial version, we support the following algoirthms. We are working on more 
 
 1. [PCWNet (ECCV2022)[1]](model_document/PCWNet/README.md)
 2. [PSMNet (CVPR2018)[2]](model_document/PSMNet/README.md)
+3. [RAFT-Stereo (3DV2021)[3]](model_document/RAFT-Stereo/README.md)
 
 Please click the hyperlink of each algorithm for more detailed explanation.
 
@@ -149,6 +150,8 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 
 [2] Chang, Jia-Ren, and Yong-Sheng Chen. "Pyramid stereo matching network." Proceedings of the IEEE conference on computer vision and pattern recognition. 2018.
 
+[3] Lipson, Lahav, Zachary Teed, and Jia Deng. “RAFT-Stereo: Multilevel Recurrent Field Transforms for Stereo Matching.” arXiv, September 15, 2021. 
+
 [comment]: <> (## Citation)
 
 [comment]: <> (If you think this toolkit or the results are helpful to you and your research, please cite us!)
@@ -173,3 +176,4 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@pku.edu.cn
 - [Rao Zhibo](https://github.com/RaoHaocheng): raoxi36@foxmail.com
+- [Yuanhang Kong](https://github.com/kongdebug): KeyK@foxmail.com

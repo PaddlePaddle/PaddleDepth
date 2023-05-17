@@ -76,6 +76,11 @@ class ArgsParser(object):
                             help="Learning rate. e.g. 0.01, 0.001, 0.0001")
         parser.add_argument('--maxEpochs', type=int, default=sys_define.MAX_EPOCHS,
                             help="Max step. e.g. 500")
+        parser.add_argument('--precision', type=str, default="fp32", choices=["fp32", "fp16"],
+                            help="Use AMP (Auto mixed precision) if precision='fp16'. If precision='fp32', the training is normal.")
+        parser.add_argument('--iter_update', type=ArgsParser.__str2bool, default=False, 
+                            help="Determine whether to update the learning rate after each iteration")
+
 
         return parser
 

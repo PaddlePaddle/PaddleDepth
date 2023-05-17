@@ -13,6 +13,8 @@ class BuildTrainingGraph(MetaOps, ResultContainer):
         MetaOps.__init__(self, args, jf_model)
         ResultContainer.__init__(self)
         self.__args = args
+        if self.__args.precision == "fp16":
+            self.scaler = paddle.amp.GradScaler(enable=True)
 
     def __calculation_process(self, model_item: object, input_data: list, label_data: list,
                               model_id: int, is_training: bool = True) -> tuple:
@@ -24,9 +26,16 @@ class BuildTrainingGraph(MetaOps, ResultContainer):
         return output_data, loss, acc
 
     def __update_model(self, loss: list, model_id: int) -> None:
-        loss[self.OPT_LOSS_ID].backward()
-        self._opt[model_id].minimize(loss[self.OPT_LOSS_ID])
-        self._model[model_id].clear_gradients()
+        if self.__args.precision == "fp16":
+            self._opt[model_id].clear_grad()
+            self.scaler.scale(loss[self.OPT_LOSS_ID]).backward()
+            self.scaler.unscale_(self._opt[model_id])
+            self.scaler.step(self._opt[model_id])
+            self.scaler.update()
+        else:
+            loss[self.OPT_LOSS_ID].backward()
+            self._opt[model_id].minimize(loss[self.OPT_LOSS_ID]) 
+            self._model[model_id].clear_gradients()
 
     def _train_model(self, input_data: list, label_data: list) -> None:
         assert len(self._model) == len(self._opt)

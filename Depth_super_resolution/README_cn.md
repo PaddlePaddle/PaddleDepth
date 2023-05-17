@@ -141,7 +141,7 @@ Paddle-DSR工具箱目前还在积极维护与完善过程中。 我们非常欢
 
 ## 联系方式
 
-- [Yuanhang Kong](https://github.com/kongdebug): 2111330@tongji.edu.cn
+- [Yuanhang Kong](https://github.com/kongdebug): KeyK@foxmail.com
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@baidu.com
 
 
