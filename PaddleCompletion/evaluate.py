@@ -24,6 +24,8 @@ def main():
         from evulator.evulator_cspn import main as evaluator
     elif configs.model_name == "guidenet":
         from trainer.trainer_guidenet import GuideNet_train as evaluator
+    elif configs.model_name == "STDNet":
+        from trainer.trainer_std import STD_train as evaluator
     else:
         raise NotImplementedError("model {} is not implemented".format(configs.model_name))
     evaluator(configs)
