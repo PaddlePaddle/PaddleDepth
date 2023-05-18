@@ -9,7 +9,7 @@ from loss_funcs.SmoothnessLoss import SmoothnessLoss
 from utils.helper import multiscale, logger, save_checkpoint
 from utils.inverse_warp import homography_from, Intrinsics
 from data_loader.kitti_loader import load_calib, oheight, owidth, KittiDepth
-from models import GNS
+from models.GuideNet import GNS
 
 
 def iterate(mode, args, loader, model, optimize, logger, epoch):
