@@ -16,7 +16,8 @@ As initial version, we support the following algoirthms. We are working on more 
 1. [CSPN (ECCV2018)](model_document/CSPN/README.md)
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
 3. [STD (ICRA2019)](model_document/STD/README.md)
-4. 
+4. [GuideNet (IEEE Transactions on Image Processing)](model_document/GuideNet/README.md)
+
 Please click the hyperlink of each algorithm for more detailed explanation.
 
 ## Installation
@@ -71,6 +72,7 @@ You can easily reproduce our results using provided shell scripts!
 |-----------| ------- | ------- | ----- | ----- |
 | `FCFRNet` | 784.224 | 222.639 | 2.370 | 1.014 |
 | `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
+| `GuideNet` | 745.41 | 227.95 | 2.48 | 1.09 |
 
 ### NYU Depth V2
 
@@ -101,6 +103,8 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 [2] [FCFRNet: Fast and Convergent Feature Refinement Network for Depth Completion](https://doi.org/10.1609/aaai.v35i3.16311)
 
 [3] [STD: Self-Supervised Sparse-to-Dense: Self-Supervised Depth Completion from LiDAR and Monocular Camera](https://arxiv.org/pdf/1807.00275.pdf)
+
+[4] [GuideNet: Learning guided convolutional network for depth completion](https://arxiv.org/abs/1908.01238)
 
 [comment]: <> (## Citation)
 
