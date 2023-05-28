@@ -21,10 +21,13 @@ As initial version, we support the following algoirthms. We are working on more 
 
 [comment]: <> (- Depth Hints &#40;This can be used in the training of the above two models&#41;)
 
+[comment]: <> (- BTS)
+
 
 1. [Monodepth2 (ICCV2019)[1]](configs/monodepthv2/README.md)
 2. [MLDA-Net (TIP2021)[2]](configs/mldanet/README.md)
 3. [Depth Hints (ICCV2019)[3]](configs/depth_hints/README.md)
+4. [BTS[4]](configs/bts/README.md)
 
 Please click the hyperlink of each algorithm for more detailed explanation.
 
@@ -77,7 +80,7 @@ We present results of our implementations on the popular KITTI benchmarks with E
 | Depth Hints_640x192 | 0.110 | 0.818 | 4.728 | 0.189 | 0.881  | 0.959 | 0.981   |
 | Depth Hints_1024x320 | 0.109 | 0.794 | 4.474 | 0.185 | 0.887  | 0.963 | 0.982   |
 | MLDANet_640x192 | 0.108 | 0.829 | 4.678 | 0.184 | 0.885  | 0.962 | 0.983   |
-
+| BTS Densenet121_704x352 | 0.050 | 0.201 | 2.547 | 0.082 | 0.970  | 0.995 | 0.999   |
 
 ## Contribution
 
@@ -100,6 +103,8 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 [2] Song X, Li W, Zhou D, et al. MLDA-Net: Multi-level dual attention-based network for self-supervised monocular depth estimation[J]. IEEE Transactions on Image Processing, 2021, 30: 4691-4705.
 
 [3] Watson J, Firman M, Brostow G J, et al. Self-supervised monocular depth hints[C]//Proceedings of the IEEE/CVF International Conference on Computer Vision. 2019: 2162-2171.
+
+[4] LEE J, HAN M, KO D, et al. From big to small: Multi-scale local planar guidance for monocular depth estimation[Z]//arXiv: Computer Vision and Pattern Recognition. 2019.
 
 [comment]: <> (## Citation)
 
@@ -125,3 +130,4 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 
 - [Yian Zhao](https://github.com/Zhao-Yian/): zhaoyian.zh@gmail.com
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@pku.edu.cn
+- [Bopei Zheng](https://github.com/zbp-xxxp/): bopei.zheng@foxmail.com
