@@ -114,6 +114,14 @@ class TrainOptions:
         self.parser.add_argument("--scheduler_step_size",
                                  type=int,
                                  help="step size of the scheduler")
+        self.parser.add_argument("--epsilon",
+                                 type=float,
+                                 help="epsilon in Adam optimizer",
+                                 default=0.001)
+        self.parser.add_argument("--weight_decay",
+                                 type=float,
+                                 help="weight decay factor for optimization",
+                                 default=0.01)
 
         # ABLATION options
         self.parser.add_argument("--v1_multiscale",
@@ -208,6 +216,21 @@ class TrainOptions:
                                  help="if set will perform the flipping post processing "
                                       "from the original monodepthv2 paper",
                                  action="store_true")
+
+        # SUPERVISE options
+        self.parser.add_argument("--encoder",
+                                 type=str,
+                                 help='type of encoder',
+                                 default='densenet121_bts')
+        self.parser.add_argument("--max_depth",
+                                 type=float, 
+                                 help='maximum depth in estimation', 
+                                 default=80.0)
+        self.parser.add_argument('--variance_focus',
+                                 type=float,
+                                 help='lambda in paper: [0, 1], higher value more focus on minimizing variance of error',
+                                 default=0.85)
+
 
     def parse(self):
         self.options = self.parser.parse_args()
