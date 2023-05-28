@@ -19,10 +19,13 @@ PaddleMono是一款基于 PaddlePaddle 的单目深度估计工具箱，是 Padd
 
 [comment]: <> (- Depth Hints &#40;以上两个模型训练时均可开启Depth Hints&#41;)
 
+[comment]: <> (- BTS)
+
 
 1. [Monodepth2 (ICCV2019)[1]](configs/monodepthv2/README.md)
 2. [MLDA-Net (TIP2021)[2]](configs/mldanet/README.md)
 3. [Depth Hints (ICCV2019)[3]](configs/depth_hints/README.md)
+4. [BTS[4]](configs/bts/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
@@ -72,6 +75,7 @@ pip install -r requirements.txt
 | Depth Hints_640x192 | 0.110 | 0.818 | 4.728 | 0.189 | 0.881  | 0.959 | 0.981   |
 | Depth Hints_1024x320 | 0.109 | 0.794 | 4.474 | 0.185 | 0.887  | 0.963 | 0.982   |
 | MLDANet_640x192 | 0.108 | 0.829 | 4.678 | 0.184 | 0.885  | 0.962 | 0.983   |
+| BTS Densenet121_704x352 | 0.050 | 0.201 | 2.547 | 0.082 | 0.970  | 0.995 | 0.999   |
 
 ## 贡献
 
@@ -88,6 +92,8 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 [2] Song X, Li W, Zhou D, et al. MLDA-Net: Multi-level dual attention-based network for self-supervised monocular depth estimation[J]. IEEE Transactions on Image Processing, 2021, 30: 4691-4705.
 
 [3] Watson J, Firman M, Brostow G J, et al. Self-supervised monocular depth hints[C]//Proceedings of the IEEE/CVF International Conference on Computer Vision. 2019: 2162-2171.
+
+[4] LEE J, HAN M, KO D, et al. From big to small: Multi-scale local planar guidance for monocular depth estimation[Z]//arXiv: Computer Vision and Pattern Recognition. 2019.
 
 [comment]: <> "## Citation"
 
@@ -113,3 +119,4 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 
 - [Yian Zhao](https://github.com/Zhao-Yian/): zhaoyian.zh@gmail.com
 - [Zhelun Shen](https://github.com/gallenszl): shenzhelun@pku.edu.cn
+- [Bopei Zheng](https://github.com/zbp-xxxp/): bopei.zheng@foxmail.com
