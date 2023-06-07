@@ -381,7 +381,7 @@ class MonodepthOptions:
         self.parser.add_argument("--seed",
                                  type=int,
                                  help='seed used in training.',
-                                 default=120)
+                                 default=210)
         self.parser.add_argument("--model_name",
                                  type=str,
                                  help="the name of the folder to save the model in",
@@ -389,8 +389,8 @@ class MonodepthOptions:
         self.parser.add_argument("--split",
                                  type=str,
                                  help="which training split to use",
-                                 choices=["eigen_bts", "eigen_full", "odom", "benchmark"],
-                                 default="eigen_bts")
+                                 choices=["eigen_zhou"， "eigen_bts", "eigen_full", "odom", "benchmark"],
+                                 default="eigen_zhou")
         self.parser.add_argument("--num_layers",
                                  type=int,
                                  help="number of resnet layers",
@@ -410,11 +410,11 @@ class MonodepthOptions:
         self.parser.add_argument("--height",
                                  type=int,
                                  help="input image height",
-                                 default=352)
+                                 default=192)
         self.parser.add_argument("--width",
                                  type=int,
                                  help="input image width",
-                                 default=704)
+                                 default=640)
         self.parser.add_argument("--disparity_smoothness",
                                  type=float,
                                  help="disparity smoothness weight",
@@ -427,11 +427,11 @@ class MonodepthOptions:
         self.parser.add_argument("--min_depth",
                                  type=float,
                                  help="minimum depth",
-                                 default=0.01)
+                                 default=0.1)
         self.parser.add_argument("--max_depth",
                                  type=float,
                                  help="maximum depth",
-                                 default=80.0)
+                                 default=100.0)
         self.parser.add_argument("--use_stereo",
                                  help="if set, uses stereo pair for training",
                                  action="store_true")
