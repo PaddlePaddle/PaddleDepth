@@ -25,7 +25,7 @@ PaddleMono是一款基于 PaddlePaddle 的单目深度估计工具箱，是 Padd
 1. [Monodepth2 (ICCV2019)[1]](configs/monodepthv2/README.md)
 2. [MLDA-Net (TIP2021)[2]](configs/mldanet/README.md)
 3. [Depth Hints (ICCV2019)[3]](configs/depth_hints/README.md)
-4. [BTS[4]](configs/bts/README.md)
+4. [BTS[4]](configs/BTS/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
