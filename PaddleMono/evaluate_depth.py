@@ -57,7 +57,134 @@ def batch_post_process_disparity(l_disp, r_disp):
     r_mask = l_mask[:, :, ::-1]
     return r_mask * l_disp + l_mask * r_disp + (1.0 - l_mask - r_mask) * m_disp
 
+def evaluate_bts(opt, load_weight_floder=None):
+    """Evaluates a pretrained model using a specified test set
+    """
+    MIN_DEPTH = 1e-3
+    MAX_DEPTH = 80.0
+    if load_weight_floder is not None:
+        opt.load_weights_folder = load_weight_floder  # 更新
 
+    if opt.ext_disp_to_eval is None:
+
+        opt.load_weights_folder = os.path.expanduser(opt.load_weights_folder)
+
+        assert os.path.isdir(opt.load_weights_folder), \
+            "Cannot find a folder at {}".format(opt.load_weights_folder)
+
+        print("-> Loading weights from {}".format(opt.load_weights_folder))
+
+        filenames = readlines(os.path.join(splits_dir, opt.split, "eigen_test_files_with_gt.txt"))
+        encoder_path = os.path.join(opt.load_weights_folder, "encoder")
+        decoder_path = os.path.join(opt.load_weights_folder, "depth")
+
+        encoder_dict = load_weight_file(encoder_path)
+
+        img_ext = '.png' if opt.png else '.jpg'
+        test_data_path = opt.data_path
+        dataset = datasets.KITTIDepthSuperviseDataset(test_data_path, filenames, 
+                                                      opt.height, opt.width,
+                                                      opt.frame_ids, 4, is_train=False, 
+                                                      img_ext=img_ext)
+
+
+        dataloader = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=opt.num_workers, drop_last=False)
+
+        models, _ = build_model(opt)
+
+
+        model_dict = models["encoder"].state_dict()
+        models["encoder"].load_dict({k: v for k, v in encoder_dict.items() if k in model_dict})
+        models["depth"].load_dict(load_weight_file(decoder_path))
+
+        models["encoder"].eval()
+        models["depth"].eval()
+
+        pred_disps = []
+        gt_disps = []
+
+        print("-> Computing predictions with size {}x{}".format(
+            opt.width, opt.height))
+
+        with paddle.no_grad():
+            for data in tqdm(iter(dataloader)):
+                input_color = data[("color", 0, 0)]
+                focal = data["focal"]
+                output = models["depth"](models["encoder"](input_color), focal)
+                pred_disps.append(output["final_depth"].numpy())
+                gt_depth = data["depth_gt"]
+                gt_disps.append(gt_depth.numpy())
+
+        preds = np.concatenate(pred_disps)
+        gt_depths = np.concatenate(gt_disps)
+
+    print("-> Evaluating")
+
+    if opt.eval_stereo:
+        print("   Stereo evaluation - "
+              "disabling median scaling, scaling by {}".format(STEREO_SCALE_FACTOR))
+        opt.disable_median_scaling = True
+        opt.pred_depth_scale_factor = STEREO_SCALE_FACTOR
+    else:
+        print("   Mono evaluation - using median scaling")
+
+    errors = []
+    ratios = []
+
+    for i in range(preds.shape[0]):
+
+        gt_depth = gt_depths[i][0]
+        gt_height, gt_width = gt_depth.shape[:2]
+        pred_depth = preds[i][0]
+
+        # save predict result to .png
+        save_name = '/home/aistudio/result_bts'
+        if not os.path.exists(os.path.dirname(save_name)):
+            try:
+                os.mkdir(save_name)
+            except OSError as e:
+                if e.errno != errno.EEXIST:
+                    raise
+        date_drive = filenames[i].split('/')[1]
+        filename_pred_png = save_name + '/' + date_drive + '_' + filenames[i].split()[0].split('/')[-1]
+        pred_depth_scaled = pred_depth * 256.0
+        pred_depth_scaled = pred_depth_scaled.astype(np.uint16)
+        cv2.imwrite(filename_pred_png, pred_depth_scaled, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+
+        mask = np.logical_and(gt_depth > MIN_DEPTH, gt_depth < MAX_DEPTH)
+        crop = np.array([0.40810811 * gt_height, 0.99189189 * gt_height,
+                            0.03594771 * gt_width,  0.96405229 * gt_width]).astype(np.int32)
+        crop_mask = np.zeros(mask.shape)
+        crop_mask[crop[0]:crop[1], crop[2]:crop[3]] = 1
+        mask = np.logical_and(mask, crop_mask)
+        pred_depth = pred_depth[mask]
+        gt_depth = gt_depth[mask]
+
+        if not opt.disable_median_scaling:
+            ratio = np.median(gt_depth) / np.median(pred_depth)
+            ratios.append(ratio)
+            pred_depth *= ratio
+
+        pred_depth[pred_depth < MIN_DEPTH] = MIN_DEPTH
+        pred_depth[pred_depth > MAX_DEPTH] = MAX_DEPTH
+        pred_depth[np.isinf(pred_depth)] = MAX_DEPTH
+        pred_depth[np.isnan(pred_depth)] = MIN_DEPTH
+
+
+
+        errors.append(compute_errors(gt_depth, pred_depth))
+
+    if not opt.disable_median_scaling:
+        ratios = np.array(ratios)
+        med = np.median(ratios)
+        print(" Scaling ratios | med: {:0.3f} | std: {:0.3f}".format(med, np.std(ratios / med)))
+
+    mean_errors = np.array(errors).mean(0)
+
+    print("\n  " + ("{:>8} | " * 7).format("abs_rel", "sq_rel", "rmse", "rmse_log", "a1", "a2", "a3"))
+    print(("&{: 8.3f}  " * 7).format(*mean_errors.tolist()) + "\\\\")
+    print("\n-> Done!")
+    return mean_errors[0]
 
 def evaluate(opt, load_weight_floder=None):
     """Evaluates a pretrained model using a specified test set
@@ -262,7 +389,7 @@ class MonodepthOptions:
         self.parser.add_argument("--split",
                                  type=str,
                                  help="which training split to use",
-                                 choices=["eigen_zhou", "eigen_full", "odom", "benchmark"],
+                                 choices=["eigen_zhou"， "eigen_bts", "eigen_full", "odom", "benchmark"],
                                  default="eigen_zhou")
         self.parser.add_argument("--num_layers",
                                  type=int,
@@ -276,7 +403,7 @@ class MonodepthOptions:
                                  type=str,
                                  help="dataset to train on",
                                  default="kitti",
-                                 choices=["kitti", "kitti_odom", "kitti_depth", "kitti_test"])
+                                 choices=["kitti", "kitti_odom", "kitti_depth", "kitti_test", "kitti_supervise"])
         self.parser.add_argument("--png",
                                  help="if set, trains from raw KITTI png files (instead of jpgs)",
                                  action="store_true")
@@ -360,6 +487,10 @@ class MonodepthOptions:
                                  type=str,
                                  help="models to load",
                                  default=["encoder", "depth", "pose_encoder", "pose"])
+        self.parser.add_argument("--encoder",
+                                 type=str,
+                                 help='type of encoder',
+                                 default='densenet121_bts')
 
 
         # EVALUATION options
@@ -410,4 +541,7 @@ class MonodepthOptions:
 if __name__ == "__main__":
     options = MonodepthOptions()
     opts = options.parse()
-    evaluate(opts)
+    if opts.type=="BTS":
+        evaluate_bts(opts)
+    else:
+        evaluate(opts)

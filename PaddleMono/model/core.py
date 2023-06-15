@@ -1,5 +1,5 @@
 from model.mldanet.layers import *
-from model import monodepthv2, mldanet
+from model import monodepthv2, mldanet, bts
 
 def build_model(opt):
     models = {}
@@ -74,5 +74,11 @@ def build_model(opt):
                 models["encoder"].num_ch_enc, opt.scales,
                 num_output_channels=(len(opt.frame_ids) - 1))
             parameters_to_train += list(models["predictive_mask"].parameters())
+
+    elif opt.type == "BTS":
+        models["encoder"] = bts.encoder(opt)
+        parameters_to_train += list(models["encoder"].parameters())
+        models["depth"] = bts.bts(opt, models["encoder"].feat_out_channels)
+        parameters_to_train += list(models["depth"].parameters())
 
     return models, parameters_to_train

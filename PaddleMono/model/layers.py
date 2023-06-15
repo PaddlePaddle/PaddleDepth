@@ -279,6 +279,16 @@ def get_smooth_loss(disp, img):
 
     return grad_disp_x.mean() + grad_disp_y.mean()
 
+class silog_loss(nn.Layer):
+    """The classification metric based on probability
+    """
+    def __init__(self, variance_focus):
+        super(silog_loss, self).__init__()
+        self.variance_focus = variance_focus
+
+    def forward(self, depth_est, depth_gt, mask):
+        d = paddle.log(depth_est[mask]) - paddle.log(depth_gt[mask])
+        return paddle.sqrt((d ** 2).mean() - self.variance_focus * (d.mean() ** 2)) * 10.0
 
 class SSIM(nn.Layer):
     """Layer to compute the SSIM losses between a pair of images
