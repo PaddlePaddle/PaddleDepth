@@ -1,6 +1,5 @@
 # BTS
-A paddle implementation of the paper From big to small: Multi-scale local planar guidance for monocular depth estimation
-[\[arXiv: Computer Vision and Pattern Recognition\]](https://arxiv.org/abs/1907.10326v5)
+A paddle implementation of the paper [From big to small: Multi-scale local planar guidance for monocular depth estimation](https://arxiv.org/abs/1907.10326v5)
 
 
 ## Abstract
