@@ -27,7 +27,7 @@ As initial version, we support the following algoirthms. We are working on more 
 1. [Monodepth2 (ICCV2019)[1]](configs/monodepthv2/README.md)
 2. [MLDA-Net (TIP2021)[2]](configs/mldanet/README.md)
 3. [Depth Hints (ICCV2019)[3]](configs/depth_hints/README.md)
-4. [BTS[4]](configs/bts/README.md)
+4. [BTS[4]](configs/BTS/README.md)
 
 Please click the hyperlink of each algorithm for more detailed explanation.
 
