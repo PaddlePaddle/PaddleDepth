@@ -6,9 +6,6 @@ A paddle implementation of the paper From big to small: Multi-scale local planar
 ## Abstract
 A supervised monocular depth estimation network. BTS propose a network architecture that utilizes novel local planar guidance layers located at multiple stages in the decoding phase.
 
-## Training
-The code for ***BTS*** builds upon [BTS](configs/BTS/README.md).
-
 [comment]: <> (<!-- **KITTI Datasets Pretraining**)
 
 [comment]: <> (Run the script `./configs/bts/bts.sh` to pre-train on KITTI datsets. Please update `--data_path` in the bash file as your training data path.)
