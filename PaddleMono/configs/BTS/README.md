@@ -1,13 +1,9 @@
 # BTS
-A paddle implementation of the paper From big to small: Multi-scale local planar guidance for monocular depth estimation
-[\[arXiv: Computer Vision and Pattern Recognition\]](https://arxiv.org/abs/1907.10326v5)
+A paddle implementation of the paper [From big to small: Multi-scale local planar guidance for monocular depth estimation](https://arxiv.org/abs/1907.10326v5)
 
 
 ## Abstract
 A supervised monocular depth estimation network. BTS propose a network architecture that utilizes novel local planar guidance layers located at multiple stages in the decoding phase.
-
-## Training
-The code for ***BTS*** builds upon [BTS](configs/BTS/README.md).
 
 [comment]: <> (<!-- **KITTI Datasets Pretraining**)
 
