@@ -17,6 +17,7 @@ As initial version, we support the following algoirthms. We are working on more 
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
 3. [STD (ICRA2019)](model_document/STD/README.md)
 4. [GuideNet (IEEE Transactions on Image Processing)](model_document/GuideNet/README.md)
+5. [PENet (ICRA2021)](model_document/PENet/README.md)
 
 Please click the hyperlink of each algorithm for more detailed explanation.
 
@@ -74,6 +75,14 @@ You can easily reproduce our results using provided shell scripts!
 | `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
 | `GuideNet` | 745.41 | 227.95 | 2.48 | 1.09 |
 
+For PENet, we provide the results of the model trained on KITTI dataset (26 epochs) and tested kitti depth completion validation set.
+
+|Method|RMSE|MAE|iRMSE|iMAE|
+|-----------| ------- | ------- | ----- | ----- |
+| `ENet` | 779.657 | 216.850 | 2.168 | 0.937 |
+| `DA-CSPN++` | 777.029 | 212.623 | 2.126 | 0.918 |
+| `PENet` (26 epochs) | 808.295 | 242.662 | 2.742 | 1.186 |
+
 ### NYU Depth V2
 
 | Data    | RMSE   | REL    | DELTA1.02 | DELTA1.05 | DELTA1.10 |
@@ -105,6 +114,8 @@ providing a flexible toolkit to reimplement existing methods and develop their n
 [3] [STD: Self-Supervised Sparse-to-Dense: Self-Supervised Depth Completion from LiDAR and Monocular Camera](https://arxiv.org/pdf/1807.00275.pdf)
 
 [4] [GuideNet: Learning guided convolutional network for depth completion](https://arxiv.org/abs/1908.01238)
+
+[5] [PENet: Towards Precise and Efficient Image Guided Depth Completion](https://arxiv.org/abs/2103.00783)
 
 [comment]: <> (## Citation)
 

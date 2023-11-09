@@ -17,6 +17,7 @@ PaddleCompletion 是一款基于 PaddlePaddle 的深度信息补全工具箱，�
 2. [FCFRNet (AAAI2021)](model_document/FCFRNet/README.md)
 3. [STD (ICRA2019)](model_document/STD/README.md)
 4. [GuideNet (IEEE Transactions on Image Processing)](model_document/GuideNet/README.md)
+5. [PENet (ICRA2021)](model_document/PENet/README.md)
 
 请点击上方的超链接查看每个算法的实现细节
 
@@ -72,6 +73,14 @@ PaddleCompletion 基于 PaddlePaddle 2.3.2 版本开发，请使用 python 3.9 �
 | `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
 | `GuideNet` | 745.41 | 227.95 | 2.48 | 1.09 |
 
+对于 PENet, 我们提供了训练26个epoch的在验证集上的结果，如下表所示：
+
+|Method|RMSE|MAE|iRMSE|iMAE|
+|-----------| ------- | ------- | ----- | ----- |
+| `ENet` | 779.657 | 216.850 | 2.168 | 0.937 |
+| `DA-CSPN++` | 777.029 | 212.623 | 2.126 | 0.918 |
+| `PENet` (26 epochs) | 808.295 | 242.662 | 2.742 | 1.186 |
+
 ### NYU Depth V2
 
 | Data            | RMSE   | REL    | DELTA1.02 | DELTA1.05 | DELTA1.10 |
@@ -98,6 +107,8 @@ PaddleDepth 是一款由来自不同高校和企业的研发人员共同参与�
 [3] [STD: Self-Supervised Sparse-to-Dense: Self-Supervised Depth Completion from LiDAR and Monocular Camera](https://arxiv.org/pdf/1807.00275.pdf)
 
 [4] [GuideNet: Learning guided convolutional network for depth completion](https://arxiv.org/abs/1908.01238)
+
+[5] [PENet: Towards Precise and Efficient Image Guided Depth Completion](https://arxiv.org/abs/2103.00783)
 
 [comment]: <> (## Citation)
 

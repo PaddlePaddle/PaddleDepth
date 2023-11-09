@@ -273,6 +273,17 @@ def get_folder_name(args):
                 args.lr_config.MultiStepDecay['learning_rate'], args.batch_size, args.optimizer['weight_decay'], \
                 args.pretrained, args.dataset['jitter'], current_time
                 )) 
+    elif args.model_name == "penet":
+        return os.path.join(
+            args.result,
+            prefix + "input={}.lr={}.bs={}.wd={}.jitter={}.time={}".format(
+            args.dataset['input_mode'],
+            args.optimizer['lr'],
+            args.batch_size,
+            args.optimizer['weight_decay'],
+            args.dataset['jitter'],
+            current_time,
+            ))
     else:
         return os.path.join(args.result,
             prefix + 'input={}.resnet{}.lr={}.bs={}.wd={}.pretrained={}.jitter={}.time={}'.
