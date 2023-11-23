@@ -10,6 +10,7 @@ from PIL import Image
 
 from .transforms import Compose, BottomCrop, HorizontalFlip, ColorJitter, ToTensor
 from utils.pose_estimator import get_pose_pnp
+from utils.coord_conv import AddCoordsNp
 
 input_options = ['d', 'rgb', 'rgbd', 'g', 'gd']
 
@@ -78,7 +79,7 @@ def drop_depth_measurements(depth, prob_keep):
 
 
 # bulid transform
-def train_transform(rgb, sparse, target, rgb_near, args):
+def train_transform(rgb, sparse, target, rgb_near, args, **kwargs):
     # s = np.random.uniform(1.0, 1.5) # random scaling
     # angle = np.random.uniform(-5.0, 5.0) # random rotation degrees
     do_flip = np.random.uniform(0.0, 1.0) < 0.5  # random horizontal flip
@@ -107,10 +108,53 @@ def train_transform(rgb, sparse, target, rgb_near, args):
             rgb_near = transform_rgb(rgb_near)
     # sparse = drop_depth_measurements(sparse, 0.9)
 
+    position = None
+    if "position" in kwargs:
+        position = kwargs["position"]
+    if position is not None:
+        bottom_crop_only = Compose(
+            [BottomCrop((oheight, owidth))]
+        )
+        position = bottom_crop_only(position)
+        
+        if args.dataset["not_random_crop"] is False:
+            h = oheight
+            w = owidth
+            rheight = args.random_crop_height
+            rwidth = args.random_crop_width
+            i = np.random.randint(0, h - rheight + 1)
+            j = np.random.randint(0, w - rwidth + 1)
+            if rgb is not None:
+                if rgb.ndim == 3:
+                    rgb = rgb[i : i + rheight, j : j + rwidth, :]
+                elif rgb.ndim == 2:
+                    rgb = rgb[i : i + rheight, j : j + rwidth]
+            if sparse is not None:
+                if sparse.ndim == 3:
+                    sparse = sparse[i : i + rheight, j : j + rwidth, :]
+                elif sparse.ndim == 2:
+                    sparse = sparse[i : i + rheight, j : j + rwidth]
+            if target is not None:
+                if target.ndim == 3:
+                    target = target[i : i + rheight, j : j + rwidth, :]
+                elif target.ndim == 2:
+                    target = target[i : i + rheight, j : j + rwidth]
+            if rgb_near is not None:
+                if rgb_near.ndim == 3:
+                    rgb_near = rgb_near[i : i + rheight, j : j + rwidth, :]
+                elif target.ndim == 2:
+                    rgb_near = rgb_near[i : i + rheight, j : j + rwidth]
+            if position is not None:
+                if position.ndim == 3:
+                    position = position[i : i + rheight, j : j + rwidth, :]
+                elif position.ndim == 2:
+                    position = position[i : i + rheight, j : j + rwidth]
+        return rgb, sparse, target, rgb_near, position
+
     return rgb, sparse, target, rgb_near
 
 
-def val_transform(rgb, sparse, target, rgb_near, args):
+def val_transform(rgb, sparse, target, rgb_near, args, **kwargs):
     transform = Compose([
         BottomCrop((oheight, owidth)),
     ])
@@ -122,10 +166,21 @@ def val_transform(rgb, sparse, target, rgb_near, args):
         target = transform(target)
     if rgb_near is not None:
         rgb_near = transform(rgb_near)
+    
+    position = None
+    if "position" in kwargs:
+        position = kwargs["position"]
+    if position is not None:
+        position = transform(position)
+
+        return rgb, sparse, target, rgb_near, position
+
     return rgb, sparse, target, rgb_near
 
 
-def no_transform(rgb, sparse, target, rgb_near, args):
+def no_transform(rgb, sparse, target, rgb_near, args, **kwargs):
+    if "position" in kwargs:
+        return rgb, sparse, target, rgb_near, kwargs["position"]
     return rgb, sparse, target, rgb_near
 
 
@@ -312,8 +367,14 @@ class KittiDepth(paddle.io.Dataset):
 
     def __getitem__(self, index):
         rgb, sparse, target, rgb_near = self.__getraw__(index)
-        rgb, sparse, target, rgb_near = self.transform(rgb, sparse, target,
-                                                       rgb_near, self.args)
+        if self.args.model_name.lower() == "penet":
+            position = AddCoordsNp(self.args.val_h, self.args.val_w)
+            position = position.call()
+            rgb, sparse, target, rgb_near, position = self.transform(
+                rgb, sparse, target, rgb_near, self.args, position=position)
+        else:
+            rgb, sparse, target, rgb_near = self.transform(rgb, sparse, target,
+                                                        rgb_near, self.args)
         
         r_mat, t_vec = None, None
         if self.split == 'train' and self.args.use_pose:
@@ -330,8 +391,14 @@ class KittiDepth(paddle.io.Dataset):
 
         rgb, gray = handle_gray(rgb, self.args)  
         
-        candidates = {"rgb": rgb, "d": sparse, "gt_depth": target, \
-                      "g": gray, "r_mat": r_mat, "t_vec": t_vec, "rgb_near": rgb_near}
+        if self.args.model_name.lower() == "penet":
+            candidates = {"rgb": rgb, "d": sparse, "gt_depth": target, \
+                        "g": gray, "r_mat": r_mat, "t_vec": t_vec, \
+                        "rgb_near": rgb_near, "position": position, \
+                        "K": self.K}
+        else:
+            candidates = {"rgb": rgb, "d": sparse, "gt_depth": target, \
+                        "g": gray, "r_mat": r_mat, "t_vec": t_vec, "rgb_near": rgb_near}
         
         items = {
             key: to_float_tensor(val)

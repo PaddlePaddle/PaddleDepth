@@ -86,6 +86,14 @@ python evaluate.py -c configs/GuideNet.yaml
 
 The visualization results are saved in `./results/`.
 
+We provide the results of the model trained on KITTI dataset (26 epochs) and tested kitti depth completion validation set.
+
+|Method|RMSE|MAE|iRMSE|iMAE|
+|-----------| ------- | ------- | ----- | ----- |
+| `ENet` | 779.657 | 216.850 | 2.168 | 0.937 |
+| `DA-CSPN++` | 777.029 | 212.623 | 2.126 | 0.918 |
+| `PENet` (26 epochs) | 808.295 | 242.662 | 2.742 | 1.186 |
+
 ## Models
 
 For evaluation, you may need to download the [Pretrained Model](https://aistudio.baidu.com/aistudio/datasetdetail/216045), and employ it as input of the proposed network.
