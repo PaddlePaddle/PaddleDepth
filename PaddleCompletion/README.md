@@ -75,13 +75,11 @@ You can easily reproduce our results using provided shell scripts!
 | `STD` | 814.73 | 242.639 | 2.80 | 1.21 |
 | `GuideNet` | 745.41 | 227.95 | 2.48 | 1.09 |
 
-For PENet, we provide the results of the model trained on KITTI dataset (26 epochs) and tested kitti depth completion validation set.
+For PENet, we provide the results of the DA-CSPN++ (the second stage) trained on KITTI dataset and tested kitti depth completion validation set. The convergence trend in the third stage is the same as in the original paper, and the final results are still under training.
 
 |Method|RMSE|MAE|iRMSE|iMAE|
 |-----------| ------- | ------- | ----- | ----- |
-| `ENet` | 779.657 | 216.850 | 2.168 | 0.937 |
 | `DA-CSPN++` | 777.029 | 212.623 | 2.126 | 0.918 |
-| `PENet` (26 epochs) | 808.295 | 242.662 | 2.742 | 1.186 |
 
 ### NYU Depth V2
 
